@@ -16,6 +16,7 @@
 */
 #include <SDL2/SDL.h>
 #include <stdio.h>
+#include <math.h>
 
 #include "sdl_extra.h"
 #include "synth.h"
