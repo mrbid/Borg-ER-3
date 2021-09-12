@@ -144,12 +144,11 @@ float doOsc(Uint32 oscid, float input1, float input2)
     static float reciprocal_sample_rate = 0.f;
     float o;
     float f,a,r,t;
+    Uint8 input1_fmmod = 0, input1_ammod = 0, input1_mod = 0;
+    Uint8 input2_fmmod = 0, input2_ammod = 0, input2_mod = 0;
 
     if(reciprocal_sample_rate == 0)
         reciprocal_sample_rate = 1.f/(float)SAMPLE_RATE;
-
-    Uint8 input1_fmmod = 0, input1_ammod = 0, input1_mod = 0;
-    Uint8 input2_fmmod = 0, input2_ammod = 0, input2_mod = 0;
 
     // load selected oscillator dial values with scaling
     if(oscid == 1)
@@ -352,18 +351,6 @@ float doOsc(Uint32 oscid, float input1, float input2)
 
     // step oscillator phase
     oscphase[oscid] += Hz(f)*reciprocal_sample_rate;
-    // if(crush_len != 0)
-    // {
-    //     if(crush_index == 0)
-    //         oscphase[oscid] += Hz(f)*reciprocal_sample_rate;
-    //     crush_index++;
-    //     if(crush_index >= crush_len)
-    //         crush_index = 0;
-    // }
-    // else
-    // {
-    //     oscphase[oscid] += Hz(f)*reciprocal_sample_rate;
-    // }
 
     // return output
     return o;
@@ -433,9 +420,9 @@ float doFilters(float f)
         f = a_out;
     }
 
+    // biquad 2
     if(fZero(b_b1) != 1 || fZero(b_b2) != 1 || fZero(b_b3) != 1 || fZero(b_a1) != 1 || fZero(b_a2) != 1)
     {
-        // biquad 2
         const float b_out =   b_b1 * f
                             + b_b2 * b_i1
                             + b_b3 * b_i2
@@ -449,9 +436,9 @@ float doFilters(float f)
         f = b_out;
     }
 
+    // biquad 3
     if(fZero(c_b1) != 1 || fZero(c_b2) != 1 || fZero(c_b3) != 1 || fZero(c_a1) != 1 || fZero(c_a2) != 1)
     {
-        // biquad 3
         const float c_out =   c_b1 * f
                             + c_b2 * c_i1
                             + c_b3 * c_i2
@@ -504,22 +491,14 @@ void doSynth(Uint8 play)
     for(int i = 0; i < SAMPLE_RATE*synth[selected_bank].seclen; i++)
     {
         float s = 0.f;
-        float o8 = doOsc(8, 0.f, 0.f);
-        //printf("o8: %f\n", o8);
-        float o7 = doOsc(7, o8, 0.f);
-        //printf("o7: %f\n", o7);
-        float o4 = doOsc(4, o8, 0.f);
-        //printf("o4: %f\n", o4);
-        float o3 = doOsc(3, o7, o4);
-        //printf("o3: %f\n", o3);
-        float o6 = doOsc(6, o7, 0.f);
-        //printf("o6: %f\n", o6);
-        float o2 = doOsc(2, o6, o3);
-        //printf("o2: %f\n", o2);
-        float o5 = doOsc(5, o6, 0.f);
-        //printf("o5: %f\n", o5);
-        float o1 = doOsc(1, o5, o2);
-        //printf("o1: %f\n", o1);
+        const float o8 = doOsc(8, 0.f, 0.f);
+        const float o7 = doOsc(7, o8, 0.f);
+        const float o4 = doOsc(4, o8, 0.f);
+        const float o3 = doOsc(3, o7, o4);
+        const float o6 = doOsc(6, o7, 0.f);
+        const float o2 = doOsc(2, o6, o3);
+        const float o5 = doOsc(5, o6, 0.f);
+        const float o1 = doOsc(1, o5, o2);
         sample[i] = doFilters(o1);
     }
     
@@ -1179,8 +1158,7 @@ int main(int argc, char *args[])
                                 sc=1;
                                 envelope_enabled = 1;
                             }
-
-                            if(ui.play_hover == 1)
+                            else if(ui.play_hover == 1)
                             {
                                 sc=1;
                                 doSynth(1);
