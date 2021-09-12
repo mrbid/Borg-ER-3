@@ -16,7 +16,7 @@ And the copy the `i686-w64-mingw32` folder into the borg directory
 and rename it to `SDL2`.
 
 ## Windows Binary
-https://github.com/mrbid/Borg-ER-3/raw/main/borg.exe
+https://github.com/mrbid/Borg-ER-3/raw/main/borg.exe<br>
 https://github.com/mrbid/Borg-ER-3/raw/main/SDL2.dll
 
 ## Linux Binary
