@@ -7,6 +7,8 @@
 #ifndef SYNTH_H
 #define SYNTH_H
 
+#include <SDL2/SDL.h>
+
 // generators
 float getSlantSine(float phase, float resolution);
 float getImpulse(float phase, float resolution);
