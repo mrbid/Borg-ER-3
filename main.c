@@ -530,7 +530,11 @@ void loadAssets(SDL_Surface* screen)
     memset(&synth, 0x00, sizeof(struct ssynth));
 
     for(int i = 0; i < 256; i++)
+    {
+        for(int j = 0; j < 466; j++)
+            synth[i].envelope[j] = 0.5f;
         synth[i].seclen = 3;
+    }
 
     dial_rect[0] = (SDL_Rect){10, 19, 19, 19};
     dial_rect[1] = (SDL_Rect){34, 19, 19, 19};
