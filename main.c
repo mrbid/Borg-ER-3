@@ -897,7 +897,7 @@ int main(int argc, char *args[])
     }
 
     // create window
-    window = SDL_CreateWindow("Borg ER-3 - ALPHA 0.3", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, screen_rect.w, screen_rect.h, SDL_WINDOW_SHOWN);
+    window = SDL_CreateWindow("Borg ER-3 - ALPHA 0.4", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, screen_rect.w, screen_rect.h, SDL_WINDOW_SHOWN);
     if(window == NULL)
     {
         fprintf(stderr, "ERROR: SDL_CreateWindow(): %s\n", SDL_GetError());
@@ -1103,11 +1103,14 @@ int main(int argc, char *args[])
 
                 case SDL_MOUSEBUTTONUP:
                 {
+                    static struct ssynth lsyn[256];
+
                     if(envelope_enabled == 1)
                     {
                         envelope_enabled = 0;
                         doSynth(0);
                         render(screen);
+                        memcpy(&lsyn, &synth[selected_bank], sizeof(struct sui));
                     }
                     else if(selected_dial >= 0)
                     {
@@ -1115,11 +1118,16 @@ int main(int argc, char *args[])
                         selected_dial = -1;
                         doSynth(0);
                         render(screen);
+                        memcpy(&lsyn, &synth[selected_bank], sizeof(struct sui));
                     }
                     else
                     {
-                        doSynth(0);
-                        render(screen);
+                        if(memcmp(&lsyn, &synth[selected_bank], sizeof(struct sui)) != 0)
+                        {
+                            doSynth(0);
+                            render(screen);
+                            memcpy(&lsyn, &synth[selected_bank], sizeof(struct sui));
+                        }
                     }
                 }
                 break;
