@@ -490,7 +490,6 @@ void doSynth(Uint8 play)
     setSampleLen(synth[selected_bank].seclen);
     for(int i = 0; i < SAMPLE_RATE*synth[selected_bank].seclen; i++)
     {
-        float s = 0.f;
         const float o8 = doOsc(8, 0.f, 0.f);
         const float o7 = doOsc(7, o8, 0.f);
         const float o4 = doOsc(4, o8, 0.f);
