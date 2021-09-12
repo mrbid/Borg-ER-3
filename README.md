@@ -5,3 +5,6 @@ A portable (SDL) audio synthesizer / tone generator inspired by the Korg ER-1
 
 Read more about this project over at the official Medium article:<br>
 https://james-william-fletcher.medium.com/the-borg-er-3-46641d5784be
+
+## Prerequisites
+`sudo apt install --assume-yes libsdl2-2.0-0 libsdl2-dev mingw-w64`
