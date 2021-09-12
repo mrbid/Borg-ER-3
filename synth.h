@@ -8,6 +8,7 @@
 #define SYNTH_H
 
 #include <SDL2/SDL.h>
+#include <math.h>
 
 // generators
 float getSlantSine(float phase, float resolution);
