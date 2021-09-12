@@ -56,6 +56,7 @@ Uint32 outlinecolor = 0xFF000000;
 Uint32 scopecolor = 0xFF363636;
 Uint32 select_lightness = 44;
 
+Uint8 select_mode;
 Uint8 selected_bank = 0;
 Sint32 selected_dial = -1;
 Uint8 envelope_enabled = 0;
@@ -83,7 +84,6 @@ Uint8 dial_neg[] = {1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,
 struct ssynth
 {
     Uint8 seclen;
-    Uint8 select_mode;
 
     float envelope[466]; // 0-1
 
@@ -143,8 +143,8 @@ float oscphase[8] = {0.f}; // oscillator phases
 float doOsc(Uint32 oscid, float input1, float input2)
 {
     static float reciprocal_sample_rate = 0.f;
-    float o;
-    float f,a,r,t;
+    float o = 0.f;
+    float f = 0.f, a = 0.f, r = 0.f, t = 0.f;
     Uint8 input1_fmmod = 0, input1_ammod = 0, input1_mod = 0;
     Uint8 input2_fmmod = 0, input2_ammod = 0, input2_mod = 0;
 
@@ -725,11 +725,11 @@ void render(SDL_Surface* screen)
             sprintf(val, "Value: %+.2f", synth[selected_bank].dial_state[i] * dial_scale[i]);
             drawText(bb, val, 11, 397, 1);
 
-            if(synth[selected_bank].select_mode == 0)
+            if(select_mode == 0)
                 setColourLightness(bb, dial_rect[i], scopecolor, select_lightness);
-            else if(synth[selected_bank].select_mode == 1)
+            else if(select_mode == 1)
                 replaceColour(bb, dial_rect[i], scopecolor, 117, 188, 99);
-            else if(synth[selected_bank].select_mode == 2)
+            else if(select_mode == 2)
                 replaceColour(bb, dial_rect[i], scopecolor, 220, 95, 117);
         }
     }
@@ -897,7 +897,7 @@ int main(int argc, char *args[])
     }
 
     // create window
-    window = SDL_CreateWindow("Borg ER-3 - ALPHA 0.4", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, screen_rect.w, screen_rect.h, SDL_WINDOW_SHOWN);
+    window = SDL_CreateWindow("Borg ER-3 - ALPHA 0.5", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, screen_rect.w, screen_rect.h, SDL_WINDOW_SHOWN);
     if(window == NULL)
     {
         fprintf(stderr, "ERROR: SDL_CreateWindow(): %s\n", SDL_GetError());
@@ -1007,20 +1007,20 @@ int main(int argc, char *args[])
                         const Sint32 hh = dial_rect[selected_dial].h/2; // no point making this static
 
                         // scale dial sensitivity
-                        float sense = 0.001 / dial_scale[selected_dial];
-                        if(synth[selected_bank].select_mode == 0)
+                        float sense = 0.001f / dial_scale[selected_dial];
+                        if(select_mode == 0)
                         {
                             if(dial_scale[selected_dial] == MAXFREQUENCY)
-                                sense = 0.3 / dial_scale[selected_dial];
+                                sense = 0.3f / dial_scale[selected_dial];
                             else if(dial_scale[selected_dial] == MAXAMPLITUDE)
-                                sense = 0.1 / dial_scale[selected_dial];
+                                sense = 0.1f / dial_scale[selected_dial];
                             else if(dial_scale[selected_dial] == MAXRESOLUTION)
-                                sense = 0.1 / dial_scale[selected_dial];
+                                sense = 0.1f / dial_scale[selected_dial];
                         }
-                        else if(synth[selected_bank].select_mode == 1)
-                            sense = 0.001 / dial_scale[selected_dial];
-                        else if(synth[selected_bank].select_mode == 2)
-                            sense = 0.3 / dial_scale[selected_dial];
+                        else if(select_mode == 1)
+                            sense = 0.001f / dial_scale[selected_dial];
+                        else if(select_mode == 2)
+                            sense = 0.3f / dial_scale[selected_dial];
 
                         // do rotation
                         if(dial_neg[selected_dial] == 1)
@@ -1138,9 +1138,9 @@ int main(int argc, char *args[])
 
                     if(event.button.button == SDL_BUTTON_RIGHT)
                     {
-                        synth[selected_bank].select_mode++;
-                        if(synth[selected_bank].select_mode >= 3)
-                            synth[selected_bank].select_mode = 0;
+                        select_mode++;
+                        if(select_mode >= 3)
+                            select_mode = 0;
                         
                         render(screen);
                     }
