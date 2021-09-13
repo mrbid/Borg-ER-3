@@ -712,9 +712,9 @@ void render(SDL_Surface* screen)
         setColourLightness(bb, envelope_rect, scopecolor, 33);
 
     // dial hover & state
+    const Uint32 hh = dial_rect[0].h/2; // no point making this static (hack: all the same width)
     for(int i = 0; i < 50; i++)
     {
-        const Uint32 hh = dial_rect[i].h/2; // no point making this static
         const Uint32 sx = dial_rect[i].x+hh;
         const Uint32 sy = dial_rect[i].y+hh;
         const float radius = (float)(hh-2);
