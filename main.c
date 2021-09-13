@@ -704,6 +704,9 @@ void render(SDL_Surface* screen)
         // envelope
         line(bb, 7+i, 280, 7+i, 280-(126*synth[selected_bank].envelope[i]), 220, 95, 117);
     }
+    // end scope (important to illustrate amp offset clicking)
+    if(ly != 349)
+        line(bb, lx, ly, 472, 349, 220, 95, 117);
     
     if(envelope_enabled == 1)
         setColourLightness(bb, envelope_rect, scopecolor, 33);
@@ -1192,6 +1195,7 @@ int main(int argc, char *args[])
                             {
                                 sc=1;
                                 loadState();
+                                doSynth(0);
                             }
                             else if(ui.save_hover == 1)
                             {
@@ -1204,7 +1208,6 @@ int main(int argc, char *args[])
                                 sc=1;
                                 selected_bank--;
                                 doSynth(0);
-                                render(screen);
                             }
                             else if(ui.bankr_hover == 1)
                             {
@@ -1212,7 +1215,6 @@ int main(int argc, char *args[])
                                 sc=1;
                                 selected_bank++;
                                 doSynth(0);
-                                render(screen);
                             }
                             else if(ui.secl_hover == 1)
                             {
