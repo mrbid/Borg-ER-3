@@ -361,11 +361,11 @@ void SDL_FillRectAlpha(SDL_Surface* surf, const SDL_Rect* r, Uint32 colour, floa
 // https://en.wikipedia.org/wiki/Midpoint_circle_algorithm
 void circle(SDL_Surface* surf, Uint32 x0, Uint32 y0, Uint32 radius, Uint8 r, Uint8 g, Uint8 b)
 {
-    Uint32 f = 1 - radius;
-    Uint32 ddF_x = 1;
-    Uint32 ddF_y = -2 * radius;
-    Uint32 x = 0;
-    Uint32 y = radius;
+    Sint32 f = 1 - radius;
+    Sint32 ddF_x = 1;
+    Sint32 ddF_y = -2 * radius;
+    Sint32 x = 0;
+    Sint32 y = radius;
 
     const Uint32 clr = SDL_MapRGB(surf->format, r,g,b);
 
