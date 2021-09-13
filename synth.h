@@ -39,18 +39,50 @@ void stopSample();
     functions bodies
 */
 
+// float getImpulse(float phase, float resolution)
+// {
+//     float yr = 0.f;
+
+//     const float fa = 1.f;   // frequency start
+//     const float ma = 0.5f;  // amplitude start
+//     float mad = 1.f;        // amplitude divisor start
+//     const float mam = 1.4f; // amplitude change over time
+
+//     yr += sin(phase*(fa*1.f))  *  (ma/mad); mad *= mam;
+//     yr += sin(phase*(fa*2.f))  * -(ma/mad); mad *= mam;
+//     yr += sin(phase*(fa*3.f))  * -(ma/mad); mad *= mam;
+//     yr += sin(phase*(fa*4.f))  *  (ma/mad); mad *= mam;
+//     yr += sin(phase*(fa*5.f))  *  (ma/mad); mad *= mam;
+//     yr += sin(phase*(fa*6.f))  * -(ma/mad); mad *= mam;
+//     yr += sin(phase*(fa*7.f))  * -(ma/mad); mad *= mam;
+//     yr += sin(phase*(fa*8.f))  *  (ma/mad); mad *= mam;
+//     yr += sin(phase*(fa*9.f))  *  (ma/mad); mad *= mam;
+//     yr += sin(phase*(fa*10.f)) * -(ma/mad); mad *= mam;
+//     yr += sin(phase*(fa*11.f)) * -(ma/mad);
+//     return yr;
+// }
+
+// float getSquare2(float phase, float resolution)
+// {
+//     resolution *= 2.f;
+//     float yr = sin(phase);
+//     for(float h = 1.f; h < resolution; h+=2.f)
+//         if(h != 1.f)
+//             yr += sin(phase*h)/h;
+//     return yr;
+// }
+
 float aliased_sin(float theta)
 {
     // data for the wavetable
-    static int init = 0;
     static float sine_wtable[65536] = {0};
 
     // called once on first execution
-    if(init == 0)
+    if(sine_wtable[16384] < 0.5f)
     {
         for(int i = 0; i < 65536; i++)
             sine_wtable[i] = sin(i * 9.587380191e-05f); // 9.587380191e-05f = x2PIf / 65536.f;
-        init = 1;
+        //printf("table generated: %f\n", sine_wtable[16384]);
     }
 
     // return result
