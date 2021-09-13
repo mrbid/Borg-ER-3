@@ -317,7 +317,7 @@ float doOsc(Uint32 oscid, float input1, float input2)
 
     // should be blending between these shapess
     if(t <= 0.1666666716f)
-        o = sin(oscphase[oscid]) * a;
+        o = aliased_sin(oscphase[oscid]) * a;
     else if(t <= 0.3333333433f)
         o = getSlantSine(oscphase[oscid], r) * a;
     else if(t <= 0.50f)
@@ -904,7 +904,7 @@ int main(int argc, char *args[])
     }
 
     // create window
-    window = SDL_CreateWindow("Borg ER-3 - ALPHA 0.5", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, screen_rect.w, screen_rect.h, SDL_WINDOW_SHOWN);
+    window = SDL_CreateWindow("Borg ER-3 - ALPHA 0.6", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, screen_rect.w, screen_rect.h, SDL_WINDOW_SHOWN);
     if(window == NULL)
     {
         fprintf(stderr, "ERROR: SDL_CreateWindow(): %s\n", SDL_GetError());
