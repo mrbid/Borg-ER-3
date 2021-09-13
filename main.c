@@ -863,7 +863,6 @@ void render(SDL_Surface* screen)
                 if(theme_type == 2)
                 {
                     s = 0.1f;
-                    h = 0.f;
                     themeon = 0;
                 }
                 else
