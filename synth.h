@@ -72,18 +72,19 @@ void stopSample();
 //     return yr;
 // }
 
-float aliased_sin(float theta)
+float sine_wtable[65536] = {0};
+inline float aliased_sin(float theta)
 {
-    // data for the wavetable
-    static float sine_wtable[65536] = {0};
+    // // data for the wavetable
+    // static float sine_wtable[65536] = {0};
 
-    // called once on first execution
-    if(sine_wtable[16384] < 0.5f)
-    {
-        for(int i = 0; i < 65536; i++)
-            sine_wtable[i] = sin(i * 9.587380191e-05f); // 9.587380191e-05f = x2PIf / 65536.f;
-        //printf("table generated: %f\n", sine_wtable[16384]);
-    }
+    // // called once on first execution
+    // if(sine_wtable[16384] < 0.5f)
+    // {
+    //     for(int i = 0; i < 65536; i++)
+    //         sine_wtable[i] = sin(i * 9.587380191e-05f); // 9.587380191e-05f = x2PIf / 65536.f;
+    //     //printf("table generated: %f\n", sine_wtable[16384]);
+    // }
 
     // return result
     const unsigned short i = (unsigned short)(10430.37793f * theta); // 10430.37793f = 65536.f / x2PIf
@@ -218,6 +219,10 @@ int initMonoAudio(int samplerate)
     // open audio device
     if(SDL_OpenAudio(&sdlaudioformat, 0) < 0)
         return -1;
+    
+    // generate sine table
+    for(int i = 0; i < 65536; i++)
+        sine_wtable[i] = sin(i * 9.587380191e-05f); // 9.587380191e-05f = x2PIf / 65536.f;
 
     // success
     return 1;
