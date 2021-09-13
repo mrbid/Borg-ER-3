@@ -16,6 +16,7 @@ float getImpulse(float phase, float resolution);
 float getSquare(float phase, float resolution);
 float getSawtooth(float phase, float resolution);
 float getTriangle(float phase, float resolution);
+float aliased_sin(float theta);
 
 // utility functions
 float Hz(float hz);
@@ -38,46 +39,31 @@ void stopSample();
     functions bodies
 */
 
-// float getImpulse(float phase, float resolution)
-// {
-//     float yr = 0.f;
+float aliased_sin(float theta)
+{
+    // data for the wavetable
+    static int init = 0;
+    static float sine_wtable[65536] = {0};
 
-//     const float fa = 1.f;   // frequency start
-//     const float ma = 0.5f;  // amplitude start
-//     float mad = 1.f;        // amplitude divisor start
-//     const float mam = 1.4f; // amplitude change over time
+    // called once on first execution
+    if(init == 0)
+    {
+        for(int i = 0; i < 65536; i++)
+            sine_wtable[i] = sin(i * 9.587380191e-05f); // 9.587380191e-05f = x2PIf / 65536.f;
+        init = 1;
+    }
 
-//     yr += sin(phase*(fa*1.f))  *  (ma/mad); mad *= mam;
-//     yr += sin(phase*(fa*2.f))  * -(ma/mad); mad *= mam;
-//     yr += sin(phase*(fa*3.f))  * -(ma/mad); mad *= mam;
-//     yr += sin(phase*(fa*4.f))  *  (ma/mad); mad *= mam;
-//     yr += sin(phase*(fa*5.f))  *  (ma/mad); mad *= mam;
-//     yr += sin(phase*(fa*6.f))  * -(ma/mad); mad *= mam;
-//     yr += sin(phase*(fa*7.f))  * -(ma/mad); mad *= mam;
-//     yr += sin(phase*(fa*8.f))  *  (ma/mad); mad *= mam;
-//     yr += sin(phase*(fa*9.f))  *  (ma/mad); mad *= mam;
-//     yr += sin(phase*(fa*10.f)) * -(ma/mad); mad *= mam;
-//     yr += sin(phase*(fa*11.f)) * -(ma/mad);
-//     return yr;
-// }
-
-// float getSquare2(float phase, float resolution)
-// {
-//     resolution *= 2.f;
-//     float yr = sin(phase);
-//     for(float h = 1.f; h < resolution; h+=2.f)
-//         if(h != 1.f)
-//             yr += sin(phase*h)/h;
-//     return yr;
-// }
-
+    // return result
+    const unsigned short i = (unsigned short)(10430.37793f * theta); // 10430.37793f = 65536.f / x2PIf
+    return sine_wtable[i];
+}
 
 float getSlantSine(float phase, float resolution)
 {
-    float yr = sin(phase);
+    float yr = aliased_sin(phase);
     for(float h = 3.f; h < resolution; h+=1.f)
     {
-        yr += (sin(phase*h) / (h*h));
+        yr += (aliased_sin(phase*h) / (h*h));
     }
     return yr;
 }
@@ -94,7 +80,7 @@ float getImpulse(float phase, float resolution)
     const float mam = 1.4f; // amplitude change over time
 
     for(float f = 0; f <= resolution; f++, mad *= mam)
-        yr += sin(phase*(fa*f)) * (ma/mad);
+        yr += aliased_sin(phase*(fa*f)) * (ma/mad);
     
     return yr;
 }
@@ -102,28 +88,28 @@ float getImpulse(float phase, float resolution)
 float getSquare(float phase, float resolution)
 {
     resolution *= 2.f;
-    float yr = sin(phase);
+    float yr = aliased_sin(phase);
     for(float h = 3.f; h < resolution; h+=2.f)
-        yr += sin(phase*h)/h;
+        yr += aliased_sin(phase*h)/h;
     return yr;
 }
 
 float getSawtooth(float phase, float resolution)
 {
-    float yr = sin(phase);
+    float yr = aliased_sin(phase);
     for(float h = 2.f; h <= resolution; h+=1.f)
-        yr += sin(phase*h)/h;
+        yr += aliased_sin(phase*h)/h;
     return yr;
 }
 
 float getTriangle(float phase, float resolution)
 {
     resolution *= 2.f;
-    float yr = sin(phase);
+    float yr = aliased_sin(phase);
     float sign = -1.f;
     for(float h = 3.f; h <= resolution; h+=2.f)
     {
-        yr += (sin(phase*h) / (h*h)) * sign;
+        yr += (aliased_sin(phase*h) / (h*h)) * sign;
         sign *= -1.f;
     }
     return yr;
