@@ -903,7 +903,7 @@ int main(int argc, char *args[])
     }
 
     // create window
-    window = SDL_CreateWindow("Borg ER-3 - ALPHA 0.6", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, screen_rect.w, screen_rect.h, SDL_WINDOW_SHOWN);
+    window = SDL_CreateWindow("Borg ER-3 - ALPHA 0.7", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, screen_rect.w, screen_rect.h, SDL_WINDOW_SHOWN);
     if(window == NULL)
     {
         fprintf(stderr, "ERROR: SDL_CreateWindow(): %s\n", SDL_GetError());
@@ -995,7 +995,7 @@ int main(int argc, char *args[])
                             }
                         }
                         
-                        // tick envalope turn renders at 20 fps
+                        // tick envalope renders at 20 fps
                         static Uint32 lt = 0;
                         if(SDL_GetTicks() > lt)
                         {
@@ -1181,7 +1181,7 @@ int main(int argc, char *args[])
                             {
                                 sc=1;
                                 char file[256];
-                                sprintf(file, "%sbank-%d.wav", basedir, selected_bank);
+                                sprintf(file, "bank-%d.wav", selected_bank);
                                 writeWAV(file);
 
                                 // some user feedback
