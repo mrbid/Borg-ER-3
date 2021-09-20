@@ -499,7 +499,7 @@ void doSynth(Uint8 play)
         const float o2 = doOsc(2, o6, o3);
         const float o5 = doOsc(5, o6, 0.f);
         const float o1 = doOsc(1, o5, o2);
-        sample[i] = doFilters(o1);
+        sample[i] = quantise_float(doFilters(o1));
     }
     
     if(play == 1)
@@ -903,7 +903,7 @@ int main(int argc, char *args[])
     }
 
     // create window
-    window = SDL_CreateWindow("Borg ER-3 - ALPHA 0.7", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, screen_rect.w, screen_rect.h, SDL_WINDOW_SHOWN);
+    window = SDL_CreateWindow("Borg ER-3 - ALPHA 0.8", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, screen_rect.w, screen_rect.h, SDL_WINDOW_SHOWN);
     if(window == NULL)
     {
         fprintf(stderr, "ERROR: SDL_CreateWindow(): %s\n", SDL_GetError());
