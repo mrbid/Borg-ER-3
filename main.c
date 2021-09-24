@@ -896,7 +896,7 @@ void render(SDL_Surface* screen)
 int main(int argc, char *args[])
 {
     // init sdl
-    if(SDL_Init(SDL_INIT_VIDEO) < 0)
+    if(SDL_Init(SDL_INIT_VIDEO|SDL_INIT_AUDIO|SDL_INIT_EVENTS) < 0)
     {
         fprintf(stderr, "ERROR: SDL_Init(): %s\n", SDL_GetError());
         return 1;
