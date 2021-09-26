@@ -15,9 +15,8 @@ grade: stable
 confinement: strict
 
 architectures:
-- amd64
-- arm64
-- armhf
+  - build-on: [amd64, arm64, armhf]
+    run-on: [amd64, arm64, armhf]
 
 apps:
   borg:
