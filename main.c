@@ -952,6 +952,7 @@ int main(int argc, char *args[])
     SDL_SetWindowIcon(window, s_icon);
 
     // first render
+    stopSample();
     doSynth(0);
     render(screen);
 
