@@ -1,0 +1,36 @@
+name: snowball
+base: core18
+version: '0.8'
+summary: An audio synthesizer / tone generator inspired by the Korg ER-1
+description: |
+  This is fixed-state modular sythesizer using FART oscialltors, which if you can hold back the chuckles for just a moment stands for Frequency, Amplitude, Resolution, and Transformation oscillators, where the resolution regards harmonic resolution and transformation regards which wave-shape is being produced by the oscillator.
+  
+  The envelope can be clicked and dragged into any shape, and the biquads can be manually configured on a per coefficient basis, they are executed in ascending order so BIQUAD 1 executes first.
+  
+  It's a fun little synthesizer and a siritual reboot of the original Borg ER-2 which was a windows only application: https://github.com/mrbid/Borg-ER-2
+  
+  The long sypnosis can be read here: https://james-william-fletcher.medium.com/the-borg-er-3-46641d5784be
+
+grade: stable
+confinement: strict
+
+architectures:
+- amd64
+- arm64
+- armhf
+
+apps:
+  borg:
+    extensions: [gnome-3-34]
+    command: borg
+
+parts:
+  borg:
+    source: https://github.com/mrbid/Borg-ER-3
+    source-type: git
+    plugin: make
+    build-packages:
+    - libsdl2-dev
+    stage-packages:
+    - libsdl2-2.0-0
+    
