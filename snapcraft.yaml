@@ -24,7 +24,7 @@ architectures:
 
 apps:
   borg:
-    extensions: [gnome-3-34]
+    extensions: [gnome-3-38]
     command: borg
 
 parts:
