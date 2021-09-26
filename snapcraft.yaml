@@ -1,4 +1,4 @@
-name: borg
+name: borger3
 base: core18
 version: '0.8'
 summary: An audio synthesizer / tone generator inspired by the Korg ER-1
