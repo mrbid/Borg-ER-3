@@ -26,6 +26,13 @@ apps:
   borg:
     extensions: [gnome-3-38]
     command: borg
+    plugs:
+    - desktop
+    - desktop-legacy
+    - gsettings
+    - opengl
+    - wayland
+    - x11
 
 parts:
   borg:
