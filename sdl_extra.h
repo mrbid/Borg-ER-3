@@ -24,6 +24,7 @@ SDL_Surface* SDL_RGBA32Surface(Uint32 w, Uint32 h);
 
 // font
 void drawText(SDL_Surface* surface, const char* s, Uint32 x, Uint32 y, Uint8 colour);
+// to cleanup / destroy buffers: drawText(NULL, "*K", 0, 0, 0);
 
 // set/get pixel for all (source: SDL wiki ~2006)
 Uint32 SDL_GetPixel(const SDL_Surface *surface, Uint32 x, Uint32 y);
@@ -1362,6 +1363,12 @@ void drawText(SDL_Surface* o, const char* s, Uint32 x, Uint32 y, Uint8 colour)
         SDL_KeyGreenToAlpha(font_white);
 
         replaceColour(font_white, (SDL_Rect){0,0,447,11}, 0xFF000000, 255, 255, 255);
+    }
+    if(s[0] == '*' && s[1] == 'K') // signal cleanup
+    {
+        SDL_FreeSurface(font_black);
+        SDL_FreeSurface(font_white);
+        return;
     }
 
     SDL_Surface* font = font_black;
