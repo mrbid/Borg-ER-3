@@ -182,14 +182,14 @@ Uint32 sample_len = 0;
 
 void audioCallback(void* unused, Uint8* stream, int len)
 {
-    if(sample_index > sample_len)
+    if(sample_index >= sample_len)
         return;
     
     for(int i = 0; i < len; i++)
     {
         stream[i] = sample[sample_index];
         sample_index++;
-        if(sample_index > sample_len)
+        if(sample_index >= sample_len)
         {
             SDL_PauseAudio(1);
             return;
@@ -212,8 +212,8 @@ void stopSample()
 void setSampleLen(Uint32 seconds)
 {
     sample_len = sdlaudioformat.freq * seconds;
-    if(sample_len >= MAX_SAMPLE)
-        sample_len = MAX_SAMPLE-1;
+    if(sample_len > MAX_SAMPLE)
+        sample_len = MAX_SAMPLE;
 }
 
 int initMonoAudio(int samplerate)
