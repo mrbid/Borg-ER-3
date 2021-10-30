@@ -1,0 +1,10 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Borg ER-3
+Comment=A tone generator inspired by the Korg ER-1
+StartupNotify=false
+Exec=borg
+Icon=${SNAP}/meta/gui/borg.png
+Terminal=false
+Type=Application
+Categories=Utility;Audio
