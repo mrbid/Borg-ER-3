@@ -1,4 +1,4 @@
-name: borger3
+name: borg
 base: core20
 version: '0.81'
 summary: A tone generator inspired by the Korg ER-1
