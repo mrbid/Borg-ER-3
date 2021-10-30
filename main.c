@@ -698,15 +698,15 @@ void render(SDL_Surface* screen)
 
         // draw scope
         const Uint32 ny = 349+sa;
-        line(bb, lx, ly, nx, ny, 220, 95, 117);
+        linergb(bb, lx, ly, nx, ny, 220, 95, 117);
         lx = nx, ly = ny;
 
         // envelope
-        line(bb, 7+i, 280, 7+i, 280-(126*synth[selected_bank].envelope[i]), 220, 95, 117);
+        linergb(bb, 7+i, 280, 7+i, 280-(126*synth[selected_bank].envelope[i]), 220, 95, 117);
     }
     // end scope (important to illustrate amp offset clicking)
     if(ly != 349)
-        line(bb, lx, ly, 472, 349, 220, 95, 117);
+        linergb(bb, lx, ly, 472, 349, 220, 95, 117);
     
     if(envelope_enabled == 1)
         setColourLightness(bb, envelope_rect, scopecolor, 33);
@@ -722,8 +722,8 @@ void render(SDL_Surface* screen)
         const float s1 = (sin(1.570796371f + (synth[selected_bank].dial_state[i] * 6.283185482f)) * radius)+0.5f;
         const Uint32 ex = sx + c1;
         const Uint32 ey = sy + s1;
-        line(bb, sx, sy, ex, ey, 255,255,255);
-        //dda_line(bb, sx, sy, ex, ey, 0xFFFFFFFF);
+        linergb(bb, sx, sy, ex, ey, 255,255,255);
+        //dda_linergb(bb, sx, sy, ex, ey, 0xFFFFFFFF);
 
         if(ui.dial_hover[i] == 1)
         {
