@@ -315,7 +315,7 @@ float doOsc(Uint32 oscid, float input1, float input2)
             t *= squish(input2);
     }
 
-    // oscid correction
+    // oscid correction (because oscid should start from 0 and not 1 for oscphase index)
     oscid -= 1;
 
     // should be blending between these shapess
