@@ -906,7 +906,7 @@ int main(int argc, char *args[])
     }
 
     // create window
-    window = SDL_CreateWindow("Borg ER-3 - ALPHA 0.82", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, screen_rect.w, screen_rect.h, SDL_WINDOW_SHOWN);
+    window = SDL_CreateWindow("Borg ER-3 - ALPHA 0.83", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, screen_rect.w, screen_rect.h, SDL_WINDOW_SHOWN);
     if(window == NULL)
     {
         fprintf(stderr, "ERROR: SDL_CreateWindow(): %s\n", SDL_GetError());
@@ -1154,8 +1154,12 @@ int main(int argc, char *args[])
                         
                         render(screen);
                     }
-
-                    if(event.button.button == SDL_BUTTON_LEFT)
+                    else if(event.button.button == SDL_BUTTON_X1)
+                    {
+                        doSynth(1);
+                        render(screen);
+                    }
+                    else if(event.button.button == SDL_BUTTON_LEFT)
                     {
                         Uint8 sc = 0; // skip check
 
