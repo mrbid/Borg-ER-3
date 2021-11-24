@@ -318,19 +318,71 @@ float doOsc(Uint32 oscid, float input1, float input2)
     // oscid correction (because oscid should start from 0 and not 1 for oscphase index)
     oscid -= 1;
 
-    // should be blending between these shapess
+    // blending between shapes
     if(t <= 0.1666666716f)
-        o = aliased_sin(oscphase[oscid]) * a;
+    {
+        float d1 = 0.1666666716f - t;
+        float d2 = 0.1666666716f - d1;
+        d1 *= 6.f;
+        d2 *= 6.f;
+        o = (aliased_sin(oscphase[oscid]) * a) * d1;
+        if(t > 0)
+        {
+            o += (getSlantSine(oscphase[oscid], r) * a) * d2;
+        }
+    }
     else if(t <= 0.3333333433f)
-        o = getSlantSine(oscphase[oscid], r) * a;
+    {
+        float d1 = 0.1666666716f - (t - 0.1666666716f);
+        float d2 = 0.1666666716f - d1;
+        d1 *= 6.f;
+        d2 *= 6.f;
+        o = (getSlantSine(oscphase[oscid], r) * a) * d1;
+        if(t > 0)
+        {
+            o += (getSquare(oscphase[oscid], r) * a) * d2;
+        }
+    }
     else if(t <= 0.50f)
-        o = getSquare(oscphase[oscid], r) * a;
+    {
+        float d1 = 0.1666666716f - (t - 0.3333333433f);
+        float d2 = 0.1666666716f - d1;
+        d1 *= 6.f;
+        d2 *= 6.f;
+        o = (getSquare(oscphase[oscid], r) * a) * d1;
+        if(t > 0)
+        {
+            o += (getSawtooth(oscphase[oscid], r) * a) * d2;
+        }
+    }
     else if(t <= 0.6666666865f)
-        o = getSawtooth(oscphase[oscid], r) * a;
+    {
+        float d1 = 0.1666666716f - (t - 0.50f);
+        float d2 = 0.1666666716f - d1;
+        d1 *= 6.f;
+        d2 *= 6.f;
+        o = (getSawtooth(oscphase[oscid], r) * a) * d1;
+        if(t > 0)
+        {
+            o += (getTriangle(oscphase[oscid], r) * a) * d2;
+        }
+    }
     else if(t <= 0.8333333731f)
-        o = getTriangle(oscphase[oscid], r) * a;
+    {
+        float d1 = 0.1666666716f - (t - 0.6666666865f);
+        float d2 = 0.1666666716f - d1;
+        d1 *= 6.f;
+        d2 *= 6.f;
+        o = (getTriangle(oscphase[oscid], r) * a) * d1;
+        if(t > 0)
+        {
+            o += (getImpulse(oscphase[oscid], r) * a) * d2;
+        }
+    }
     else
+    {
         o = getImpulse(oscphase[oscid], r) * a;
+    }
 
     // add/sub/mul modulation inputs
     if(input1_mod != 0)
