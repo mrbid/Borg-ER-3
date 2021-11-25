@@ -25,7 +25,7 @@ architectures:
 apps:
   borger3:
     extensions: [gnome-3-38]
-    command: borg
+    command: borger3
     plugs:
     - desktop
     - desktop-legacy
