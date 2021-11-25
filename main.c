@@ -381,7 +381,17 @@ float doOsc(Uint32 oscid, float input1, float input2)
     }
     else
     {
-        o = getImpulse(oscphase[oscid], r) * a;
+        float d1 = 0.1666666716f - (t - 0.8333333731f);
+        float d2 = 0.1666666716f - d1;
+        d1 *= 6.f;
+        d2 *= 6.f;
+        o = (getImpulse(oscphase[oscid], r) * a) * d1;
+        if(t > 0)
+        {
+            o += (getBipulse(oscphase[oscid], r) * a) * d2;
+        }
+
+        //o = getBipulse(oscphase[oscid], r) * a;
     }
 
     // add/sub/mul modulation inputs
@@ -958,7 +968,7 @@ int main(int argc, char *args[])
     }
 
     // create window
-    window = SDL_CreateWindow("Borg ER-3 - ALPHA 0.83", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, screen_rect.w, screen_rect.h, SDL_WINDOW_SHOWN);
+    window = SDL_CreateWindow("Borg ER-3 - ALPHA 0.84", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, screen_rect.w, screen_rect.h, SDL_WINDOW_SHOWN);
     if(window == NULL)
     {
         fprintf(stderr, "ERROR: SDL_CreateWindow(): %s\n", SDL_GetError());
