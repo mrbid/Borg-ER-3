@@ -1,11 +1,11 @@
 all:
-	gcc main.c -Ofast -lSDL2 -lm -o borg
+	gcc main.c -Ofast -lSDL2 -lm -o borger3
 
 install:
-	cp borg $(DESTDIR)
+	cp borger3 $(DESTDIR)
 
 uninstall:
-	rm $(DESTDIR)/borg
+	rm $(DESTDIR)/borger3
 
 clean:
-	rm borg
+	rm borger3
