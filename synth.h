@@ -3,6 +3,11 @@
         September 2021
     
     Borg ER-3
+
+    Since the Borg is locked to 30 samples of
+    oscillator harmonic resolution we could
+    pre compute a reciprocal table for the
+    divides.
 */
 #ifndef SYNTH_H
 #define SYNTH_H
@@ -148,6 +153,39 @@ float getTriangle(float phase, float resolution)
     }
     return yr;
 }
+
+/*
+    to create this harmonic table I exported
+    the LFO bipulse from the Borg ER-2 as a
+    WAV and loaded it into SPEAR to do an FFT
+    on it; https://www.klingbeil.com/spear/
+*/
+
+#define BIP_GAIN 14.f
+#define BIP_FSCA 0.0013f
+float bip_table[11][2] ={
+                            {779.671814*BIP_FSCA  , 0.060361*BIP_GAIN},
+                            {3078.329590*BIP_FSCA , 0.018012*BIP_GAIN},
+                            {5208.136719*BIP_FSCA , 0.010895*BIP_GAIN},
+                            {7320.946289*BIP_FSCA , 0.007949*BIP_GAIN},
+                            {9428.479492*BIP_FSCA , 0.006374*BIP_GAIN},
+                            {11533.578125*BIP_FSCA, 0.005422*BIP_GAIN},
+                            {13637.631836*BIP_FSCA, 0.004812*BIP_GAIN},
+                            {15740.907227*BIP_FSCA, 0.004415*BIP_GAIN},
+                            {17843.794922*BIP_FSCA, 0.004164*BIP_GAIN},
+                            {19946.164062*BIP_FSCA, 0.004023*BIP_GAIN},
+                            {21350.996094*BIP_FSCA, 0.000099*BIP_GAIN}
+                        };
+
+float getBipulse(float phase, float resolution)
+{
+    float yr = 0.f;
+    const unsigned short res = resolution > 10.f ? 10 : (unsigned short)resolution;
+    for(unsigned short h = 0; h <= res; h++)
+        yr += aliased_sin(phase * bip_table[h][0]) * bip_table[h][1];
+    return yr;
+}
+
 
 float Hz(float hz)
 {
