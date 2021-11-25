@@ -1,4 +1,4 @@
-name: borg
+name: borger3
 base: core20
 version: '0.82'
 summary: A tone generator inspired by the Korg ER-1
@@ -23,7 +23,7 @@ architectures:
     run-on: armhf
 
 apps:
-  borg:
+  borger3:
     extensions: [gnome-3-38]
     command: borg
     plugs:
@@ -35,7 +35,7 @@ apps:
     - x11
 
 parts:
-  borg:
+  borger3:
     source: https://github.com/mrbid/Borg-ER-3
     source-type: git
     plugin: make
