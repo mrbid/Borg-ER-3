@@ -159,6 +159,8 @@ float getTriangle(float phase, float resolution)
     the LFO bipulse from the Borg ER-2 as a
     WAV and loaded it into SPEAR to do an FFT
     on it; https://www.klingbeil.com/spear/
+    
+    It's not good.
 */
 
 #define BIP_GAIN 14.f
