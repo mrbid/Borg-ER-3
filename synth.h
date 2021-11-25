@@ -6,8 +6,8 @@
 
     Since the Borg is locked to 30 samples of
     oscillator harmonic resolution we could
-    pre compute a reciprocal table for the
-    divides.
+    pre-compute a reciprocal table for the
+    divisions.
 */
 #ifndef SYNTH_H
 #define SYNTH_H
