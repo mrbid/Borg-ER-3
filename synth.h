@@ -78,7 +78,9 @@ void stopSample();
 //     return yr;
 // }
 
+#ifdef __x86_64__ 
 float sine_wtable[65536] = {0};
+#endif
 inline float aliased_sin(float theta)
 {
     // // data for the wavetable
@@ -93,8 +95,12 @@ inline float aliased_sin(float theta)
     // }
 
     // return result
+#ifdef __x86_64__ 
     const unsigned short i = (unsigned short)(10430.37793f * theta); // 10430.37793f = 65536.f / x2PIf
     return sine_wtable[i];
+#else
+    return sin(theta);
+#endif
 }
 
 float getSlantSine(float phase, float resolution)
@@ -159,7 +165,7 @@ float getTriangle(float phase, float resolution)
     the LFO bipulse from the Borg ER-2 as a
     WAV and loaded it into SPEAR to do an FFT
     on it; https://www.klingbeil.com/spear/
-    
+
     It's not good.
 */
 
@@ -269,10 +275,12 @@ int initMonoAudio(int samplerate)
     // open audio device
     if(SDL_OpenAudio(&sdlaudioformat, 0) < 0)
         return -1;
-    
+
+#ifdef __x86_64__ 
     // generate sine table
     for(int i = 0; i < 65536; i++)
         sine_wtable[i] = sin(i * 9.587380191e-05f); // 9.587380191e-05f = x2PIf / 65536.f;
+#endif
 
     // success
     return 1;
