@@ -157,17 +157,17 @@ float Hz(float hz)
 
 int fZero(float f)
 {
-    return f > -0.01 && f < 0.01 ? 1 : 0;
+    return f > -0.01f && f < 0.01f ? 1.f : 0.f;
 }
 
 float squish(float f)
 {
-    return fabs(tanh(f));
+    return fabsf(tanhf(f));
 }
 
 Sint8 quantise_float(float f)
 {
-    if(f < 0)
+    if(f < 0.f)
         f -= 0.5f;
     else
         f += 0.5f;
