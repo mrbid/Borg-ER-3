@@ -1378,6 +1378,7 @@ int main(int argc, char *args[])
                     SDL_FreeSurface(s_plus);
                     SDL_FreeSurface(s_minus);
                     SDL_FreeSurface(s_mul);
+                    SDL_CursorPointer(1337);
                     drawText(NULL, "*K", 0, 0, 0);
                     SDL_DestroyWindow(window);
                     SDL_CloseAudio();
@@ -1392,4 +1393,3 @@ int main(int argc, char *args[])
     //Done.
     return 0;
 }
-
