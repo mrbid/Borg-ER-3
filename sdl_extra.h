@@ -20,7 +20,7 @@ float wrapf(float f);
 Uint8 inrangel(Uint32 x, Uint32 y, SDL_Rect r);
 Uint8 inrange( Uint8* out, Uint8* skip_check, Uint32 x, Uint32 y, SDL_Rect r);
 void  SDL_KeyGreenToAlpha(SDL_Surface* image);
-void  SDL_CursorPointer(Uint32 type);
+void  SDL_CursorPointer(Uint32 type); // pass 1337 to cleanup
 SDL_Surface* SDL_RGBA32Surface(Uint32 w, Uint32 h);
 
 // font
@@ -174,6 +174,11 @@ void SDL_CursorPointer(Uint32 type)
         SDL_SetCursor(cursor_arrow);
     else if(type == 1)
         SDL_SetCursor(cursor_hand);
+    else if(type == 1337)
+    {
+        SDL_FreeCursor(cursor_hand);
+        SDL_FreeCursor(cursor_arrow);
+    }
 }
 
 Uint8 inrangel(Uint32 x, Uint32 y, SDL_Rect r)
