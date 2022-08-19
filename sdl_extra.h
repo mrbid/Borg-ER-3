@@ -1,5 +1,5 @@
 /*
-    James William Fletcher (james@voxdsp.com)
+    James William Fletcher (github.com/mrbid)
         September 2021
     
     A few SDL helper functions to make life
