@@ -27,6 +27,7 @@ apps:
     extensions: [gnome-3-38]
     command: borger3
     plugs:
+    - audio-playback
     - desktop
     - desktop-legacy
     - gsettings
