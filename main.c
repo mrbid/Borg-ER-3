@@ -977,6 +977,11 @@ int main(int argc, char *args[])
 
     // create screen
     SDL_Surface* screen = SDL_GetWindowSurface(window);
+    if(screen == NULL)
+    {
+        fprintf(stderr, "ERROR: SDL_GetWindowSurface(): %s\n", SDL_GetError());
+        return 1;
+    }
 
     // get app dir
     basedir = SDL_GetBasePath();
