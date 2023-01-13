@@ -9,6 +9,8 @@
     Could have used:
     https://wiki.libsdl.org/CategoryIO
 
+    I suppose at that point I could use SDL_Log over printf.
+
     But I like stdio and I saw no benefit to SDL IO.
 
     The Borg ER-2 was in C++ and this time I decided to
@@ -968,7 +970,7 @@ int main(int argc, char *args[])
     }
 
     // create window
-    window = SDL_CreateWindow("Borg ER-3 - ALPHA 0.84", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, screen_rect.w, screen_rect.h, SDL_WINDOW_SHOWN);
+    window = SDL_CreateWindow("Borg ER-3 - ALPHA 0.85", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, screen_rect.w, screen_rect.h, SDL_WINDOW_SHOWN);
     if(window == NULL)
     {
         fprintf(stderr, "ERROR: SDL_CreateWindow(): %s\n", SDL_GetError());
@@ -986,8 +988,16 @@ int main(int argc, char *args[])
     // get app dir
     basedir = SDL_GetBasePath();
     appdir = SDL_GetPrefPath("voxdsp", "borger3");
-    printf("%s\n", basedir);
-    printf("%s\n", appdir);
+    printf("basePath: %s\n", basedir);
+    printf("prefPath: %s\n", appdir);
+
+    // sdl version
+    SDL_version compiled;
+    SDL_version linked;
+    SDL_VERSION(&compiled);
+    SDL_GetVersion(&linked);
+    printf("Compiled against SDL version %u.%u.%u.\n", compiled.major, compiled.minor, compiled.patch);
+    printf("Linked against SDL version %u.%u.%u.\n", linked.major, linked.minor, linked.patch);
 
     // load assets
     loadAssets(screen);
@@ -1103,6 +1113,7 @@ int main(int argc, char *args[])
                         if(dial_neg[selected_dial] == 1)
                         {
                             synth[selected_bank].dial_state[selected_dial] += ((dial_rect[selected_dial].y+hh) - y)*sense;
+                            //printf("%f %i %i\n", ((dial_rect[selected_dial].y+hh) - y)*sense, ((dial_rect[selected_dial].y+hh) - y), hh);
                             if(synth[selected_bank].dial_state[selected_dial] >= 1.f)
                                 synth[selected_bank].dial_state[selected_dial] = 1.f;
                             else if(synth[selected_bank].dial_state[selected_dial] < -1.f)
@@ -1116,7 +1127,8 @@ int main(int argc, char *args[])
                             else if(synth[selected_bank].dial_state[selected_dial] < 0.f)
                                 synth[selected_bank].dial_state[selected_dial] = 0.f;
                         }
-                        SDL_WarpMouseInWindow(window, dial_rect[selected_dial].x+hh, dial_rect[selected_dial].y+hh);
+                        if(y != dial_rect[selected_dial].y+hh)
+                            SDL_WarpMouseInWindow(window, dial_rect[selected_dial].x+hh, dial_rect[selected_dial].y+hh);
 
                         // tick dial turn renders at 20 fps
                         static Uint32 lt = 0;
@@ -1398,3 +1410,4 @@ int main(int argc, char *args[])
     //Done.
     return 0;
 }
+
