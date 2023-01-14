@@ -1,4 +1,4 @@
-# Borg-ER-3
+# Borg ER-3
 A portable (SDL) audio synthesizer / tone generator inspired by the Korg ER-1
 
 ![Image of the Borg-ER3](https://miro.medium.com/max/964/1*0UUSrjWHIpSUcQAzevQd1A.png)
