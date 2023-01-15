@@ -25,5 +25,8 @@ https://github.com/mrbid/Borg-ER-3/raw/main/borg-x86_64.AppImage
 ## Linux Binary (Ubuntu 22.10)
 https://github.com/mrbid/Borg-ER-3/raw/main/borg
 
+## Deb (Ubuntu 22.10)
+https://github.com/mrbid/Borg-ER-3/raw/main/borg.deb
+
 ## Snapcraft / Software Center
 https://snapcraft.io/borger3
