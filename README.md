@@ -15,18 +15,8 @@ https://www.libsdl.org/release/SDL2-devel-2.0.16-mingw.tar.gz
 And the copy the `i686-w64-mingw32` folder into the borg directory
 and rename it to `SDL2`.
 
-## Windows Binary
-https://github.com/mrbid/Borg-ER-3/raw/main/borg.exe<br>
-https://github.com/mrbid/Borg-ER-3/raw/main/SDL2.dll
-
-## Linux AppImage
-https://github.com/mrbid/Borg-ER-3/raw/main/borg-x86_64.AppImage
-
-## Linux Binary (Ubuntu 22.10)
-https://github.com/mrbid/Borg-ER-3/raw/main/borg
-
-## Deb (Ubuntu 22.10)
-https://github.com/mrbid/Borg-ER-3/raw/main/borg.deb
-
 ## Snapcraft / Software Center
 https://snapcraft.io/borger3
+
+## Latest Release
+https://github.com/mrbid/Borg-ER-3/releases/tag/0.86
