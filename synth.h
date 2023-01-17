@@ -182,19 +182,18 @@ Uint32 sample_index = 0;
 Uint32 sample_len = 0;
 
 void audioCallback(void* unused, Uint8* stream, int len)
-{
-    if(sample_index >= sample_len)
-        return;
-    
+{    
     for(int i = 0; i < len; i++)
     {
-        stream[i] = sample[sample_index];
-        sample_index++;
         if(sample_index >= sample_len)
         {
+            stream[i] = 0;
             SDL_PauseAudio(1);
-            return;
+            continue;
         }
+
+        stream[i] = sample[sample_index];
+        sample_index++;
     }
 }
 
