@@ -10,7 +10,7 @@ https://james-william-fletcher.medium.com/the-borg-er-3-46641d5784be
 https://snapcraft.io/borger3
 
 ## Latest Release
-*Windows, Linux, Deb, AppImage, etc*
+*Windows, Linux, Deb, AppImage, etc*<br>
 https://github.com/mrbid/Borg-ER-3/releases/tag/0.86
 
 ## Prerequisites
