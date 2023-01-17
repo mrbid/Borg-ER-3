@@ -1,6 +1,15 @@
 #ifndef RES_H
 #define RES_H
 
+/*
+  All of the assets in this file are work of James William Fletcher
+  and are licensed under the same license as the source code of this
+  project, with the exception of icon_image which was source from;
+  https://www.iconspng.com/image/147309/vinyl-record
+  Licensed as:
+  "Licencing! Vinyl Record PNG icons - The pictures are free for personal and even for commercial use. You can modify, copy and distribute the vectors on Vinyl Record in iconspng.com. All without asking for permission or setting a link to the source. So, attribution is not required."
+*/
+
 // multiply button
 static const struct {
   Uint32  width;
