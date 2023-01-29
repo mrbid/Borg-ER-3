@@ -970,7 +970,7 @@ int main(int argc, char *args[])
     }
 
     // create window
-    window = SDL_CreateWindow("Borg ER-3 - ALPHA 0.86", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, screen_rect.w, screen_rect.h, SDL_WINDOW_SHOWN);
+    window = SDL_CreateWindow("Borg ER-3 - ALPHA 0.87", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, screen_rect.w, screen_rect.h, SDL_WINDOW_SHOWN);
     if(window == NULL)
     {
         fprintf(stderr, "ERROR: SDL_CreateWindow(): %s\n", SDL_GetError());
@@ -1110,10 +1110,10 @@ int main(int argc, char *args[])
                             sense = 0.3f / dial_scale[selected_dial];
 
                         // do rotation
+                        synth[selected_bank].dial_state[selected_dial] += ((dial_rect[selected_dial].y+hh) - y)*sense;
+                        //printf("%f %i %i\n", ((dial_rect[selected_dial].y+hh) - y)*sense, ((dial_rect[selected_dial].y+hh) - y), hh);
                         if(dial_neg[selected_dial] == 1)
                         {
-                            synth[selected_bank].dial_state[selected_dial] += ((dial_rect[selected_dial].y+hh) - y)*sense;
-                            //printf("%f %i %i\n", ((dial_rect[selected_dial].y+hh) - y)*sense, ((dial_rect[selected_dial].y+hh) - y), hh);
                             if(synth[selected_bank].dial_state[selected_dial] >= 1.f)
                                 synth[selected_bank].dial_state[selected_dial] = 1.f;
                             else if(synth[selected_bank].dial_state[selected_dial] < -1.f)
@@ -1121,7 +1121,6 @@ int main(int argc, char *args[])
                         }
                         else
                         {
-                            synth[selected_bank].dial_state[selected_dial] += ((dial_rect[selected_dial].y+hh) - y)*sense;
                             if(synth[selected_bank].dial_state[selected_dial] >= 1.f)
                                 synth[selected_bank].dial_state[selected_dial] = 1.f;
                             else if(synth[selected_bank].dial_state[selected_dial] < 0.f)
@@ -1216,6 +1215,52 @@ int main(int argc, char *args[])
                             doSynth(0);
                             render(screen);
                             memcpy(&lsyn, &synth[selected_bank], sizeof(struct sui));
+                        }
+                    }
+                }
+                break;
+
+                case SDL_MOUSEWHEEL:
+                {
+                    for(int i = 0; i < 50; i++)
+                    {
+                        if(ui.dial_hover[i] == 1)
+                        {
+                            // scale dial sensitivity
+                            float sense = 0.01f / dial_scale[i];
+                            if(select_mode == 0)
+                                sense = 0.1f / dial_scale[i];
+                            else if(select_mode == 1)
+                                sense = 0.01f / dial_scale[i];
+                            else if(select_mode == 2)
+                                sense = 1.f / dial_scale[i];
+
+                            // turn
+                            synth[selected_bank].dial_state[i] += ((float)event.wheel.y)*sense;
+                            printf("%f\n", ((float)event.wheel.y)*sense);
+
+                            // limit
+                            if(dial_neg[i] == 1)
+                            {
+                                if(synth[selected_bank].dial_state[i] >= 1.f)
+                                    synth[selected_bank].dial_state[i] = 1.f;
+                                else if(synth[selected_bank].dial_state[i] < -1.f)
+                                    synth[selected_bank].dial_state[i] = -1.f;
+                            }
+                            else
+                            {
+                                if(synth[selected_bank].dial_state[i] >= 1.f)
+                                    synth[selected_bank].dial_state[i] = 1.f;
+                                else if(synth[selected_bank].dial_state[i] < 0.f)
+                                    synth[selected_bank].dial_state[i] = 0.f;
+                            }
+
+                            // update
+                            doSynth(0);
+                            render(screen);
+
+                            // done
+                            break;
                         }
                     }
                 }
