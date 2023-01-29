@@ -63,6 +63,8 @@ Uint8 selected_bank = 0;
 Sint32 selected_dial = -1;
 Uint8 envelope_enabled = 0;
 
+float scope_zoom = 466.f;
+
 SDL_Rect screen_rect = {0, 0, 480, 435};
 SDL_Rect bankl_rect = {6, 416, 12, 14};
 SDL_Rect bankr_rect = {66, 416, 12, 14};
@@ -744,7 +746,7 @@ void render(SDL_Surface* screen)
     for(int i = 0; i < 466; i++)
     {
         // oscilloscope (63px flux) mid 349
-        const float sc = ((float)synth[selected_bank].seclen * (float)SAMPLE_RATE) / 466.f;
+        const float sc = ((float)synth[selected_bank].seclen * (float)SAMPLE_RATE) / scope_zoom;
         const Uint32 i2 = ((float)i)*sc;
         const Uint32 nx = 7+i;
 
@@ -968,7 +970,7 @@ int main(int argc, char *args[])
     }
 
     // create window
-    window = SDL_CreateWindow("Borg ER-3 - ALPHA 0.88", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, screen_rect.w, screen_rect.h, SDL_WINDOW_SHOWN);
+    window = SDL_CreateWindow("Borg ER-3 - ALPHA 0.89", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, screen_rect.w, screen_rect.h, SDL_WINDOW_SHOWN);
     if(window == NULL)
     {
         fprintf(stderr, "ERROR: SDL_CreateWindow(): %s\n", SDL_GetError());
@@ -1015,6 +1017,8 @@ int main(int argc, char *args[])
     printf("\n");
     printf("BIQUADS are executed from left to right, first BIQUAD 1, then 2, then 3.\n");
     printf("\n");
+    printf("You can use the Load button to reset any changes since your last Save.\n");
+    printf("\n");
     printf("Source: https://github.com/mrbid/Borg-ER-3\n");
     printf("https://meettechniek.info/additional/additive-synthesis.html\n");
     
@@ -1057,6 +1061,7 @@ int main(int argc, char *args[])
     render(screen);
 
     // event loop
+    static Sint32 x, y;
     while(1)
     {
         SDL_Event event;
@@ -1072,7 +1077,7 @@ int main(int argc, char *args[])
 
                 case SDL_MOUSEMOTION:
                 {
-                    const Sint32 x = event.motion.x, y = event.motion.y;
+                    x = event.motion.x, y = event.motion.y;
                     static struct sui lui;
                     
                     // Adjust envelope
@@ -1257,7 +1262,7 @@ int main(int argc, char *args[])
 
                             // turn
                             synth[selected_bank].dial_state[i] += ((float)event.wheel.y)*sense;
-                            printf("%f\n", ((float)event.wheel.y)*sense);
+                            //printf("%f\n", ((float)event.wheel.y)*sense);
 
                             // limit
                             if(dial_neg[i] == 1)
@@ -1283,12 +1288,19 @@ int main(int argc, char *args[])
                             break;
                         }
                     }
+                    
+                    if(x > 6 && x < 473 && y > 285 && y < 412)
+                    {
+                        scope_zoom += ((float)event.wheel.y)*120.f;
+                        if(scope_zoom < 466.f){scope_zoom = 466.f;}
+                        render(screen);
+                    }
                 }
                 break;
 
                 case SDL_MOUSEBUTTONDOWN:
                 {
-                    const Uint32 x = event.button.x, y = event.button.y;
+                    x = event.button.x, y = event.button.y;
 
                     if(event.button.button == SDL_BUTTON_RIGHT)
                     {
@@ -1297,6 +1309,16 @@ int main(int argc, char *args[])
                         {
                             for(int i = 0; i < 466; i++)
                                 synth[selected_bank].envelope[i] = 0.5f;
+                            doSynth(0);
+                            render(screen);
+                            break;
+                        }
+
+                        // reset scope
+                        if(x > 6 && x < 473 && y > 285 && y < 412)
+                        {
+                            scope_zoom = 466.f;
+                            render(screen);
                             break;
                         }
 
