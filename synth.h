@@ -40,7 +40,6 @@ void setSampleLen(Uint32 seconds);
 void playSample();
 void stopSample();
 
-
 /*
     functions bodies
 */
@@ -58,32 +57,12 @@ inline float aliased_sin(float theta)
 #endif
 }
 
-float getSlantSine(float phase, float resolution)
+inline float aliased_cos(float theta)
 {
-    float yr = aliased_sin(phase);
-    for(float h = 3.f; h < resolution; h+=1.f)
-    {
-        yr += (aliased_sin(phase*h) / (h*h));
-    }
-    return yr;
+    return aliased_sin(1.570796371f - theta);
 }
 
-float getImpulse(float phase, float resolution)
-{
-    if(resolution == 0)
-        resolution = 1;
-    float yr = 0.f;
 
-    const float fa = 1.f;   // frequency start
-    const float ma = 0.5f;  // amplitude start
-    float mad = 1.f;        // amplitude divisor start
-    const float mam = 1.4f; // amplitude change over time
-
-    for(float f = 0; f <= resolution; f++, mad *= mam)
-        yr += aliased_sin(phase*(fa*f)) * (ma/mad);
-    
-    return yr;
-}
 
 float getSquare(float phase, float resolution)
 {
@@ -115,57 +94,78 @@ float getTriangle(float phase, float resolution)
     return yr;
 }
 
-/*
-    to create this harmonic table I exported
-    the LFO bipulse from the Borg ER-2 as a
-    WAV and loaded it into SPEAR to do an FFT
-    on it; https://www.klingbeil.com/spear/
+float getSlantSine(float phase, float resolution)
+{
+    float yr = aliased_sin(phase);
+    for(float h = 3.f; h < resolution; h+=1.f)
+    {
+        yr += (aliased_sin(phase*h) / (h*h));
+    }
+    return yr;
+}
 
-    It's not good.
-*/
-
-#define BIP_GAIN 14.f
-#define BIP_FSCA 0.0013f
-float bip_table[11][2] ={
-                            {779.671814*BIP_FSCA  , 0.060361*BIP_GAIN},
-                            {3078.329590*BIP_FSCA , 0.018012*BIP_GAIN},
-                            {5208.136719*BIP_FSCA , 0.010895*BIP_GAIN},
-                            {7320.946289*BIP_FSCA , 0.007949*BIP_GAIN},
-                            {9428.479492*BIP_FSCA , 0.006374*BIP_GAIN},
-                            {11533.578125*BIP_FSCA, 0.005422*BIP_GAIN},
-                            {13637.631836*BIP_FSCA, 0.004812*BIP_GAIN},
-                            {15740.907227*BIP_FSCA, 0.004415*BIP_GAIN},
-                            {17843.794922*BIP_FSCA, 0.004164*BIP_GAIN},
-                            {19946.164062*BIP_FSCA, 0.004023*BIP_GAIN},
-                            {21350.996094*BIP_FSCA, 0.000099*BIP_GAIN}
-                        };
-
-float getBipulse(float phase, float resolution)
+// https://meettechniek.info/additional/additive-synthesis.html
+float getImpulse(float phase, float resolution)
 {
     float yr = 0.f;
-    const unsigned short res = resolution > 10.f ? 10 : (unsigned short)resolution;
-    for(unsigned short h = 0; h <= res; h++)
-        yr += aliased_sin(phase * bip_table[h][0]) * bip_table[h][1];
+    
+    // if(resolution >= 0){yr += aliased_sin(phase * 1.f);}
+    // if(resolution >= 1){yr -= aliased_cos(phase * 2.f) * 0.9f;}
+    // if(resolution >= 2){yr -= aliased_sin(phase * 3.f) * 0.8f;}
+    // if(resolution >= 3){yr += aliased_cos(phase * 4.f) * 0.7f;}
+    // if(resolution >= 4){yr += aliased_sin(phase * 5.f) * 0.6f;}
+    // if(resolution >= 5){yr -= aliased_cos(phase * 6.f) * 0.5f;}
+    // if(resolution >= 6){yr -= aliased_sin(phase * 7.f) * 0.4f;}
+    // if(resolution >= 7){yr += aliased_cos(phase * 8.f) * 0.3f;}
+    // if(resolution >= 8){yr += aliased_sin(phase * 9.f) * 0.2f;}
+    // if(resolution >= 9){yr -= aliased_cos(phase * 10.f)* 0.1f;}
+
+    if(resolution >= 0 ){yr += aliased_sin(phase * 1.f) * 0.5f;}
+    if(resolution >= 3 ){yr -= aliased_cos(phase * 2.f) * 0.45f;}
+    if(resolution >= 6 ){yr -= aliased_sin(phase * 3.f) * 0.4f;}
+    if(resolution >= 9 ){yr += aliased_cos(phase * 4.f) * 0.35f;}
+    if(resolution >= 12){yr += aliased_sin(phase * 5.f) * 0.3f;}
+    if(resolution >= 16){yr -= aliased_cos(phase * 6.f) * 0.25f;}
+    if(resolution >= 19){yr -= aliased_sin(phase * 7.f) * 0.2f;}
+    if(resolution >= 22){yr += aliased_cos(phase * 8.f) * 0.15f;}
+    if(resolution >= 25){yr += aliased_sin(phase * 9.f) * 0.1f;}
+    if(resolution >= 28){yr -= aliased_cos(phase * 10.f)* 0.05f;}
+    return yr;
+}
+
+// https://meettechniek.info/additional/additive-synthesis.html
+float getViolin(float phase, float resolution)
+{
+    float yr = 0.f;
+    if(resolution >= 0 ){yr += aliased_sin(phase * 1.f) * 0.995f;}
+    if(resolution >= 4 ){yr += aliased_cos(phase * 2.f) * 0.940f;}
+    if(resolution >= 8 ){yr += aliased_sin(phase * 3.f) * 0.425f;}
+    if(resolution >= 12){yr += aliased_cos(phase * 4.f) * 0.480f;}
+    if(resolution >= 16){yr += aliased_cos(phase * 6.f) * 0.365f;}
+    if(resolution >= 20){yr += aliased_sin(phase * 7.f) * 0.040f;}
+    if(resolution >= 24){yr += aliased_cos(phase * 8.f) * 0.085f;}
+    if(resolution >= 28){yr += aliased_cos(phase * 10.f)* 0.090f;}
     return yr;
 }
 
 
-float Hz(float hz)
+
+inline float Hz(float hz)
 {
     return hz * 6.283185482f;
 }
 
-int fZero(float f)
+inline int fZero(float f)
 {
     return f > -0.01f && f < 0.01f ? 1.f : 0.f;
 }
 
-float squish(float f)
+inline float squish(float f)
 {
     return fabsf(tanhf(f));
 }
 
-Sint8 quantise_float(float f)
+inline Sint8 quantise_float(float f)
 {
     if(f < 0.f)
         f -= 0.5f;
