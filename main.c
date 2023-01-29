@@ -390,10 +390,8 @@ float doOsc(Uint32 oscid, float input1, float input2)
         o = (getImpulse(oscphase[oscid], r) * a) * d1;
         if(t > 0)
         {
-            o += (getBipulse(oscphase[oscid], r) * a) * d2;
+            o += (getViolin(oscphase[oscid], r) * a) * d2;
         }
-
-        //o = getBipulse(oscphase[oscid], r) * a;
     }
 
     // add/sub/mul modulation inputs
@@ -970,7 +968,7 @@ int main(int argc, char *args[])
     }
 
     // create window
-    window = SDL_CreateWindow("Borg ER-3 - ALPHA 0.87", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, screen_rect.w, screen_rect.h, SDL_WINDOW_SHOWN);
+    window = SDL_CreateWindow("Borg ER-3 - ALPHA 0.88", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, screen_rect.w, screen_rect.h, SDL_WINDOW_SHOWN);
     if(window == NULL)
     {
         fprintf(stderr, "ERROR: SDL_CreateWindow(): %s\n", SDL_GetError());
@@ -985,6 +983,9 @@ int main(int argc, char *args[])
         return 1;
     }
 
+    // credit
+    printf("Borg ER-3 by James William Fletcher\n");
+
     // get app dir
     basedir = SDL_GetBasePath();
     appdir = SDL_GetPrefPath("voxdsp", "borger3");
@@ -998,6 +999,25 @@ int main(int argc, char *args[])
     SDL_GetVersion(&linked);
     printf("Compiled against SDL version %u.%u.%u.\n", compiled.major, compiled.minor, compiled.patch);
     printf("Linked against SDL version %u.%u.%u.\n", linked.major, linked.minor, linked.patch);
+
+    // instructions
+    printf("\n");
+    printf("FART = Frequency, Amplitude, Resolution, Transition\n");
+    printf("Resolution = How many additive sinusoids are combined to make the final waveshape.\n");
+    printf("Transition = Selects which wave shape to output but also allows blending between the shapes.\n");
+    printf("Wave shape order: Sine, Slanted Sine, Square, Saw, Triangle, Impulse, Violin.\n");
+    printf("\n");
+    printf("Adjust the dials by left clicking and dragging or hovering and scrolling mouse 3 in the Y axis.\n");
+    printf("\n");
+    printf("Binds to play audio: spacebar, mouse3, mouse4\n");
+    printf("Reset envelope: right click on it\n");
+    printf("Scroll dial sensitivity selection: right click, three sensitvity options\n");
+    printf("\n");
+    printf("BIQUADS are executed from left to right, first BIQUAD 1, then 2, then 3.\n");
+    printf("\n");
+    printf("Source: https://github.com/mrbid/Borg-ER-3\n");
+    printf("https://meettechniek.info/additional/additive-synthesis.html\n");
+    
 
     // load assets
     loadAssets(screen);
@@ -1272,13 +1292,23 @@ int main(int argc, char *args[])
 
                     if(event.button.button == SDL_BUTTON_RIGHT)
                     {
+                        // reset envelope
+                        if(x > 6 && x < 473 && y > 155 && y < 282)
+                        {
+                            for(int i = 0; i < 466; i++)
+                                synth[selected_bank].envelope[i] = 0.5f;
+                            break;
+                        }
+
+                        // scroll select modes
                         select_mode++;
                         if(select_mode >= 3)
                             select_mode = 0;
                         
+                        // render changes
                         render(screen);
                     }
-                    else if(event.button.button == SDL_BUTTON_X1)
+                    else if(event.button.button == SDL_BUTTON_X1 || event.button.button == SDL_BUTTON_MIDDLE)
                     {
                         doSynth(1);
                         render(screen);
