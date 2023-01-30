@@ -43,6 +43,7 @@ char *basedir, *appdir;
 
 Uint32 theme_type = 1;
 Uint32 themeon = 0;
+Uint32 egg = 0;
 
 SDL_Surface* bb; // backbuffer
 SDL_Surface* s_bg;
@@ -711,6 +712,7 @@ void render(SDL_Surface* screen)
 
     // blit bg
     SDL_BlitSurface(s_bg, NULL, bb, NULL);
+    if(egg == 0){SDL_FillRect(bb, &(SDL_Rect){theme_rect.x-1, theme_rect.y-1, theme_rect.w+2, theme_rect.h+2}, 0xffe8a200);}
 
     // draw bank selection
     if(selected_bank < 10)
@@ -889,7 +891,7 @@ void render(SDL_Surface* screen)
     else if(ui.bankr_hover == 1){ih=1; setColourLightness(bb, bankr_rect, bgcolor, select_lightness);}
     else if(ui.load_hover == 1){ih=1; setColourLightness(bb, load_rect, bgcolor, select_lightness);}
     else if(ui.save_hover == 1){ih=1; setColourLightness(bb, save_rect, bgcolor, select_lightness);}
-    else if(ui.theme_hover == 1){ih=1; setColourLightness(bb, theme_rect, bgcolor, select_lightness);}
+    else if(egg == 1 && ui.theme_hover == 1){ih=1; setColourLightness(bb, theme_rect, bgcolor, select_lightness);}
     else if(ui.secl_hover == 1){ih=1; setColourLightness(bb, secl_rect, bgcolor, select_lightness);}
     else if(ui.secr_hover == 1){ih=1; setColourLightness(bb, secr_rect, bgcolor, select_lightness);}
     else if(ui.export_hover == 1){ih=1; setColourLightness(bb, export_rect, bgcolor, select_lightness);}
@@ -960,8 +962,11 @@ void render(SDL_Surface* screen)
         SDL_CursorPointer(0);
 }
 
-int main(int argc, char *args[])
+int main(int argc, char *argv[])
 {
+    // egg
+    if(argc == 2){egg = atoi(argv[1]);}
+
     // init sdl
     if(SDL_Init(SDL_INIT_VIDEO|SDL_INIT_AUDIO|SDL_INIT_EVENTS) < 0)
     {
@@ -970,7 +975,7 @@ int main(int argc, char *args[])
     }
 
     // create window
-    window = SDL_CreateWindow("Borg ER-3 - ALPHA 0.89", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, screen_rect.w, screen_rect.h, SDL_WINDOW_SHOWN);
+    window = SDL_CreateWindow("Borg ER-3", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, screen_rect.w, screen_rect.h, SDL_WINDOW_SHOWN);
     if(window == NULL)
     {
         fprintf(stderr, "ERROR: SDL_CreateWindow(): %s\n", SDL_GetError());
@@ -1472,7 +1477,7 @@ int main(int argc, char *args[])
 
                         if(sc == 0)
                         {
-                            if(ui.theme_hover == 1)
+                            if(egg == 1 && ui.theme_hover == 1)
                             {
                                 sc=1;
                                 theme_type=1;
