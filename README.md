@@ -1,7 +1,7 @@
 # Borg ER-3
 A portable (SDL) audio synthesizer / tone generator inspired by the Korg ER-1
 
-[![Image of the Borg-ER3](https://miro.medium.com/max/964/1*0UUSrjWHIpSUcQAzevQd1A.png)](https://www.youtube.com/watch?v=gLB91cO6RaE "Borg ER-3 FART Oscillators Demonstration Video")
+[![Image of the Borg-ER3](https://dashboard.snapcraft.io/site_media/appmedia/2023/01/borger3_eyBQLNu.png)](https://www.youtube.com/watch?v=gLB91cO6RaE "Borg ER-3 FART Oscillators Demonstration Video")
 
 Read more about this project over at the official Medium article:<br>
 https://james-william-fletcher.medium.com/the-borg-er-3-46641d5784be
