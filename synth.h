@@ -63,6 +63,15 @@ inline float aliased_cos(float theta)
 }
 
 
+float getSlantSine(float phase, float resolution)
+{
+    float yr = aliased_sin(phase);
+    for(float h = 3.f; h < resolution; h+=1.f)
+    {
+        yr += aliased_sin(phase*h) / (h*h);
+    }
+    return yr;
+}
 
 float getSquare(float phase, float resolution)
 {
@@ -94,22 +103,12 @@ float getTriangle(float phase, float resolution)
     return yr;
 }
 
-float getSlantSine(float phase, float resolution)
-{
-    float yr = aliased_sin(phase);
-    for(float h = 3.f; h < resolution; h+=1.f)
-    {
-        yr += (aliased_sin(phase*h) / (h*h));
-    }
-    return yr;
-}
-
 // https://meettechniek.info/additional/additive-synthesis.html
 float getImpulse(float phase, float resolution)
 {
     float yr = 0.f;
     
-    // if(resolution >= 0){yr += aliased_sin(phase * 1.f);}
+    // if(resolution >= 0){yr += aliased_sin(phase);}
     // if(resolution >= 1){yr -= aliased_cos(phase * 2.f) * 0.9f;}
     // if(resolution >= 2){yr -= aliased_sin(phase * 3.f) * 0.8f;}
     // if(resolution >= 3){yr += aliased_cos(phase * 4.f) * 0.7f;}
@@ -120,7 +119,7 @@ float getImpulse(float phase, float resolution)
     // if(resolution >= 8){yr += aliased_sin(phase * 9.f) * 0.2f;}
     // if(resolution >= 9){yr -= aliased_cos(phase * 10.f)* 0.1f;}
 
-    if(resolution >= 0 ){yr += aliased_sin(phase * 1.f) * 0.5f;}
+    if(resolution >= 0 ){yr += aliased_sin(phase) * 0.5f;}
     if(resolution >= 3 ){yr -= aliased_cos(phase * 2.f) * 0.45f;}
     if(resolution >= 6 ){yr -= aliased_sin(phase * 3.f) * 0.4f;}
     if(resolution >= 9 ){yr += aliased_cos(phase * 4.f) * 0.35f;}
@@ -137,7 +136,7 @@ float getImpulse(float phase, float resolution)
 float getViolin(float phase, float resolution)
 {
     float yr = 0.f;
-    if(resolution >= 0 ){yr += aliased_sin(phase * 1.f) * 0.995f;}
+    if(resolution >= 0 ){yr += aliased_sin(phase) * 0.995f;}
     if(resolution >= 4 ){yr += aliased_cos(phase * 2.f) * 0.940f;}
     if(resolution >= 8 ){yr += aliased_sin(phase * 3.f) * 0.425f;}
     if(resolution >= 12){yr += aliased_cos(phase * 4.f) * 0.480f;}
