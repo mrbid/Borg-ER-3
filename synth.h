@@ -119,7 +119,7 @@ float getImpulse(float phase, float resolution)
     // if(resolution >= 8){yr += aliased_sin(phase * 9.f) * 0.2f;}
     // if(resolution >= 9){yr -= aliased_cos(phase * 10.f)* 0.1f;}
 
-    if(resolution >= 0 ){yr += aliased_sin(phase) * 0.5f;}
+    if(resolution >= 0 ){yr += aliased_sin(phase)       * 0.5f;}
     if(resolution >= 3 ){yr -= aliased_cos(phase * 2.f) * 0.45f;}
     if(resolution >= 6 ){yr -= aliased_sin(phase * 3.f) * 0.4f;}
     if(resolution >= 9 ){yr += aliased_cos(phase * 4.f) * 0.35f;}
@@ -136,7 +136,7 @@ float getImpulse(float phase, float resolution)
 float getViolin(float phase, float resolution)
 {
     float yr = 0.f;
-    if(resolution >= 0 ){yr += aliased_sin(phase) * 0.995f;}
+    if(resolution >= 0 ){yr += aliased_sin(phase)       * 0.995f;}
     if(resolution >= 4 ){yr += aliased_cos(phase * 2.f) * 0.940f;}
     if(resolution >= 8 ){yr += aliased_sin(phase * 3.f) * 0.425f;}
     if(resolution >= 12){yr += aliased_cos(phase * 4.f) * 0.480f;}
