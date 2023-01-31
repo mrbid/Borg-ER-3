@@ -1,0 +1,5 @@
+release/*
+borg.AppDir/usr/bin/*
+deb/usr/bin/*
+SDL2/*
+appimagetool-x86_64.AppImage

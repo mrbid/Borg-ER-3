@@ -1,0 +1,7 @@
+Package: Borg-ER-3
+Version: 0.85
+Section: sound
+Priority: optional
+Architecture: amd64
+Description: A tone generator inspired by the Korg ER-1
+Maintainer: James William Fletcher <tux@tuxpusher.com>

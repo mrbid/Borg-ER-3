@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=Borg ER-3
+Exec=borg
+Icon=/usr/share/icons/hicolor/512x512/borg512x512.png
+Type=Application
+Categories=Utility;Audio

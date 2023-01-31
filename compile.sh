@@ -1,4 +1,6 @@
 mkdir release
+rm -f borg.AppDir/usr/bin/borg
+rm -f deb/usr/bin/borg
 rm -f release/borg
 rm -f release/borg_native
 rm -f release/borg.exe
@@ -18,9 +20,12 @@ cp release/borg borg.AppDir/usr/bin/borg
 ./appimagetool-x86_64.AppImage borg.AppDir release/borg.AppImage
 cp release/borg deb/usr/bin/borg
 dpkg-deb --build deb release/borg.deb
+rm -f borg.AppDir/usr/bin/borg
+rm -f deb/usr/bin/borg
 cp SDL2/bin/SDL2.dll release/SDL2.dll
 strip --strip-unneeded release/SDL2.dll
 upx --lzma --best release/SDL2.dll
 cd release
 zip borg_win.zip SDL2.dll borg.exe
 rm -f SDL2.dll
+rm -f borg.exe
