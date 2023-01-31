@@ -16,6 +16,12 @@ https://snapcraft.io/borger3
 *Windows, Linux, Deb, AppImage, etc*<br>
 https://github.com/mrbid/Borg-ER-3/releases/tag/1.0
 
+## Build Instructions
+```
+sudo ./getdeps.sh
+./compile.sh
+```
+
 ## Prerequisites
 `sudo apt install --assume-yes libsdl2-2.0-0 libsdl2-dev mingw-w64 upx-ucl`
 
