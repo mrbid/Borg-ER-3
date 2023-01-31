@@ -1,4 +1,6 @@
 mkdir release
+mkdir -p borg.AppDir/usr/bin
+mkdir -p deb/usr/bin
 rm -f borg.AppDir/usr/bin/borg
 rm -f deb/usr/bin/borg
 rm -f release/borg
