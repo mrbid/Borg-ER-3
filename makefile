@@ -10,6 +10,8 @@ endif
 
 all:
 	$(CC) $(CFLAGS) main.c $(LINK_DEPS) $(LDFLAGS) -o $(PRJ_NAME)
+	strip --strip-unneeded $(PRJ_NAME)
+	upx --lzma --best $(PRJ_NAME)
 
 install:
 	install -Dm 0755 $(PRJ_NAME) -t $(DESTDIR)$(PREFIX)/bin
