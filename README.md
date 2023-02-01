@@ -12,7 +12,7 @@ https://james-william-fletcher.medium.com/the-borg-er-3-46641d5784be
     <b>Resolution</b> = How many additive sinusoids are combined to make the final waveshape.<br/>
     <b>Transition</b> = Selects which wave shape to output but also allows blending between the shapes.<br/>
     <b>Wave shape order:</b> Sine, Slanted Sine, Square, Saw, Triangle, Impulse, Violin.<br/><br/>
-    <b>Adjust the dials by left clicking and dragging or hovering and scrolling mouse 3 in the Y axis.</b><br/>
+    <b>Adjust the dials by left clicking and dragging or hovering and scrolling mouse 3 in the Y axis.</b><br/><br/>
     <b>Binds to play audio:</b> spacebar, mouse3, mouse4<br/>
     <b>Reset envelope:</b> right click on it<br/>
     <b>Scroll dial sensitivity selection:</b> right click, three sensitvity options<br/><br/>
