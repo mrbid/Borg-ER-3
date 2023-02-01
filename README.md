@@ -8,20 +8,16 @@ https://james-william-fletcher.medium.com/the-borg-er-3-46641d5784be
 
 <details>
     <summary>Details</summary>
-    <b>FART</b> = Frequency, Amplitude, Resolution, Transition
-    <b>Resolution</b> = How many additive sinusoids are combined to make the final waveshape.
-    <b>Transition</b> = Selects which wave shape to output but also allows blending between the shapes.
-    <b>Wave shape order:</b> Sine, Slanted Sine, Square, Saw, Triangle, Impulse, Violin.
-    <b>Adjust the dials by left clicking and dragging or hovering and scrolling mouse 3 in the Y axis.</b>
-
-    <b>Binds to play audio:</b> spacebar, mouse3, mouse4
-    <b>Reset envelope:</b> right click on it
-    <b>Scroll dial sensitivity selection:</b> right click, three sensitvity options
-
-    <b>BIQUADS are executed from left to right, first BIQUAD 1, then 2, then 3.</b>
-
-    <b>You can use the Load button to reset any changes since your last Save.</b>
-    
+    <b>FART</b> = Frequency, Amplitude, Resolution, Transition<br/>
+    <b>Resolution</b> = How many additive sinusoids are combined to make the final waveshape.<br/>
+    <b>Transition</b> = Selects which wave shape to output but also allows blending between the shapes.<br/>
+    <b>Wave shape order:</b> Sine, Slanted Sine, Square, Saw, Triangle, Impulse, Violin.<br/><br/>
+    <b>Adjust the dials by left clicking and dragging or hovering and scrolling mouse 3 in the Y axis.</b><br/>
+    <b>Binds to play audio:</b> spacebar, mouse3, mouse4<br/>
+    <b>Reset envelope:</b> right click on it<br/>
+    <b>Scroll dial sensitivity selection:</b> right click, three sensitvity options<br/><br/>
+    <b>BIQUADS are executed from left to right, first BIQUAD 1, then 2, then 3.</b><br/><br/>
+    <b>You can use the Load button to reset any changes since your last Save.</b><br/><br/>
     <b>You can mouse 3 Y axis scroll zoom the oscilloscope.</b>
 </details>
 
