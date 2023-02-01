@@ -19,7 +19,7 @@ https://james-william-fletcher.medium.com/the-borg-er-3-46641d5784be
     <b>Scroll dial sensitivity selection:</b> right click, three sensitvity options<br/><br/>
     <b>BIQUADS are executed from left to right, first BIQUAD 1, then 2, then 3.</b><br/><br/>
     <b>You can use the Load button to reset any changes since your last Save.</b><br/><br/>
-    <b>You can mouse 3 Y axis scroll zoom the oscilloscope.</b>
+    <b>You can mouse 3 Y axis scroll zoom the oscilloscope, right click to reset zoom.</b>
     </blockquote>
 </details>
 
