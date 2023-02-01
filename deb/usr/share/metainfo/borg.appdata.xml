@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application>
+	<id type="desktop">borg.desktop</id>
+	<metadata_license>CC-BY-4.0</metadata_license>
+	<project_license>MIT</project_license>
+	<name>Borg ER-3</name>
+	<summary>A portable (SDL) audio synthesizer / tone generator inspired by the Korg ER-1</summary>
+	<description>
+		<p>This is fixed-state modular synthesizer using FART oscillators, which if you can hold back the chuckles for just a moment stands for Frequency, Amplitude, Resolution, and Transformation oscillators, where the resolution regards harmonic resolution and transformation regards which wave-shape is being produced by the oscillator.</p>
+		<p>The envelope can be clicked and dragged into any shape, and the biquads can be manually configured on a per coefficient basis, they are executed in sequential order so BIQUAD 1 executes first.</p>
+	</description>
+	<screenshots>
+		<screenshot>https://dashboard.snapcraft.io/site_media/appmedia/2021/09/Screenshot_2sss.png</screenshot>
+	</screenshots>
+	<url type="homepage">https://github.com/mrbid/Borg-ER-3</url>
+	<releases>
+		<release version="1.0" date="2023-01-29" />
+	</releases>
+	<content_rating type="oars-1.0" />
+</application>
