@@ -26,6 +26,8 @@
 
 #define SAMPLE_RATE   44100
 
+//#define HERMITE_INTERPOLATE // makes no real audible difference
+
 #define MAXFREQUENCY  1800 //20000
 #define MAXAMPLITUDE  128 //SDL_MIX_MAXVOLUME
 #define MAXRESOLUTION 30
@@ -425,6 +427,19 @@ float doOsc(Uint32 oscid, float input1, float input2)
     return o;
 }
 
+#ifdef HERMITE_INTERPOLATE
+    float hermite4(float frac_pos, float xm1, float x0, float x1, float x2)
+    {
+        // laurent de soras
+        const float c = (x1 - xm1) * 0.5f;
+        const float v = x0 - x1;
+        const float w = c + v;
+        const float a = w + v + (x2 - x0) * 0.5f;
+        const float b_neg = w + a;
+        return ((((a * frac_pos) - b_neg) * frac_pos + c) * frac_pos + x0);
+    }
+#endif
+
 Uint32 eic = 0;
 Uint32 samstep = 0;
 Uint32 envelope_offset = 0;
@@ -522,7 +537,14 @@ float doFilters(float f)
     }
     
     // scale by lerped envelope
+#ifdef HERMITE_INTERPOLATE
+    if(envelope_offset == 0 || envelope_offset >= 463)
+        f *= wlerp(synth[selected_bank].envelope[envelope_offset], synth[selected_bank].envelope[envelope_offset+1], ((float)eic)*r_samstep);
+    else
+        f *= hermite4(((float)eic)*r_samstep, synth[selected_bank].envelope[envelope_offset-1], synth[selected_bank].envelope[envelope_offset], synth[selected_bank].envelope[envelope_offset+1], synth[selected_bank].envelope[envelope_offset+2]);
+#else
     f *= wlerp(synth[selected_bank].envelope[envelope_offset], synth[selected_bank].envelope[envelope_offset+1], ((float)eic)*r_samstep);
+#endif
 
     // apply offsets
     f -= synth[selected_bank].dial_state[48] * dial_scale[48];
@@ -1225,6 +1247,7 @@ int main(int argc, char *argv[])
 
                     if(envelope_enabled == 1)
                     {
+                        SDL_CaptureMouse(SDL_FALSE);
                         envelope_enabled = 0;
                         doSynth(0);
                         render(screen);
@@ -1360,6 +1383,7 @@ int main(int argc, char *argv[])
                             {
                                 sc=1;
                                 envelope_enabled = 1;
+                                SDL_CaptureMouse(SDL_TRUE);
                             }
                             else if(ui.play_hover == 1)
                             {
