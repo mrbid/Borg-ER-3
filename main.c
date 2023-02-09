@@ -20,6 +20,10 @@
 #include <stdio.h>
 #include <math.h>
 
+#ifdef __linux__
+    #include <sys/stat.h>
+#endif
+
 #include "sdl_extra.h"
 #include "synth.h"
 #include "res.h"
@@ -1020,6 +1024,7 @@ int main(int argc, char *argv[])
     appdir = SDL_GetPrefPath("voxdsp", "borger3");
     printf("basePath: %s\n", basedir);
     printf("prefPath: %s\n", appdir);
+    printf("exportPath: %s/Documents/Borg_ER-3\n\n", getenv("HOME"));
 
     // sdl version
     SDL_version compiled;
@@ -1047,7 +1052,7 @@ int main(int argc, char *argv[])
     printf("You can use the Load button to reset any changes since your last Save.\n");
     printf("\n");
     printf("Source: https://github.com/mrbid/Borg-ER-3\n");
-    printf("https://meettechniek.info/additional/additive-synthesis.html\n");
+    printf("https://meettechniek.info/additional/additive-synthesis.html\n\n");
     
 
     // load assets
@@ -1394,7 +1399,15 @@ int main(int argc, char *argv[])
                             {
                                 sc=1;
                                 char file[256];
+
+#ifdef __linux__
+                                sprintf(file, "%s/Documents/Borg_ER-3", getenv("HOME"));
+                                mkdir(file, 0755);
+                                sprintf(file, "%s/bank-%d.wav", file, selected_bank);
+                                printf("File written to: %s\n", file);
+#else
                                 sprintf(file, "bank-%d.wav", selected_bank);
+#endif
                                 writeWAV(file);
 
                                 // some user feedback
