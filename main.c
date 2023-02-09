@@ -1024,7 +1024,9 @@ int main(int argc, char *argv[])
     appdir = SDL_GetPrefPath("voxdsp", "borger3");
     printf("basePath: %s\n", basedir);
     printf("prefPath: %s\n", appdir);
+#ifdef __linux__
     printf("exportPath: %s/Documents/Borg_ER-3\n\n", getenv("HOME"));
+#endif
 
     // sdl version
     SDL_version compiled;
@@ -1399,7 +1401,6 @@ int main(int argc, char *argv[])
                             {
                                 sc=1;
                                 char file[256];
-
 #ifdef __linux__
                                 sprintf(file, "%s/Documents/Borg_ER-3", getenv("HOME"));
                                 mkdir(file, 0755);
