@@ -35,6 +35,8 @@ apps:
     - wayland
     - x11
     - home
+    environment:
+      HOME: /home/$USER
 
 parts:
   borger3:
