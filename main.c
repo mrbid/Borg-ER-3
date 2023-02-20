@@ -1402,7 +1402,9 @@ int main(int argc, char *argv[])
                                 sc=1;
                                 char file[256];
 #ifdef __linux__
-                                sprintf(file, "%s/Documents/Borg_ER-3", getenv("HOME"));
+                                sprintf(file, "%s/Documents", getenv("HOME"));
+                                mkdir(file, 0755);
+                                sprintf(file, "%s/Borg_ER-3", file);
                                 mkdir(file, 0755);
                                 sprintf(file, "%s/bank-%d.wav", file, selected_bank);
                                 printf("File written to: %s\n", file);
