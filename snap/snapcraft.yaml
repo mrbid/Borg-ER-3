@@ -1,6 +1,6 @@
 name: borger3
 base: core20
-version: '1.0'
+version: '1.0.1'
 summary: A tone generator inspired by the Korg ER-1
 description: |
   This is fixed-state modular synthesizer using FART oscillators, which if you can hold back the chuckles for just a moment stands for Frequency, Amplitude, Resolution, and Transformation oscillators, where the resolution regards harmonic resolution and transformation regards which wave-shape is being produced by the oscillator.
