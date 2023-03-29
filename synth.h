@@ -10,6 +10,7 @@
     resolution for the divisions, this is a
     marginal optimisation mostly only
     noticable in benchmarking.
+    (i say 30 but its 29 due to the < op)
 */
 #ifndef SYNTH_H
 #define SYNTH_H
