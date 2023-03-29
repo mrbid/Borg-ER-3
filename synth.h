@@ -5,15 +5,19 @@
     Borg ER-3
 
     Since the Borg is locked to 30 samples of
-    oscillator harmonic resolution we could
-    pre-compute a reciprocal table for the
-    divisions.
+    oscillator harmonic resolution I have
+    pre-computed reciprocal tables to this
+    resolution for the divisions, this is a
+    marginal optimisation mostly only
+    noticable in benchmarking.
 */
 #ifndef SYNTH_H
 #define SYNTH_H
 
 #include <SDL2/SDL.h>
 #include <math.h>
+
+#define USE_RECIPROCAL_TABLES
 
 // generators
 float getSlantSine(float phase, float resolution);
@@ -62,46 +66,105 @@ inline float aliased_cos(float theta)
     return aliased_sin(1.570796371f - theta);
 }
 
+// reciprocol tables
+#ifdef USE_RECIPROCAL_TABLES
+    const float ht[30] = {0.5f, 0.333333f, 0.25f, 0.2f, 0.166667f, 0.142857f, 0.125f, 0.111111f, 0.1f, 0.0909091f, 0.0833333f, 0.0769231f, 0.0714286f, 0.0666667f, 0.0625f, 0.0588235f, 0.0555556f, 0.0526316f, 0.05f, 0.047619f, 0.0454545f, 0.0434783f, 0.0416667f, 0.04f, 0.0384615f, 0.037037f, 0.0357143f, 0.0344828f};
+    const float hht[30] = {0.111111f, 0.0625f, 0.04f, 0.0277778f, 0.0204082f, 0.015625f, 0.0123457f, 0.01f, 0.00826446f, 0.00694444f, 0.00591716f, 0.00510204f, 0.00444444f, 0.00390625f, 0.00346021f, 0.00308642f, 0.00277008f, 0.0025f, 0.00226757f, 0.00206612f, 0.00189036f, 0.00173611f, 0.0016f, 0.00147929f, 0.00137174f, 0.00127551f, 0.00118906f};
+#endif
 
-float getSlantSine(float phase, float resolution)
-{
-    float yr = aliased_sin(phase);
-    for(float h = 3.f; h < resolution; h+=1.f)
+#ifdef USE_RECIPROCAL_TABLES
+    float getSlantSine(float phase, float resolution)
     {
-        yr += aliased_sin(phase*h) / (h*h);
+        float yr = aliased_sin(phase);
+        int i = 0;
+        for(float h = 3.f; h < resolution; h+=1.f)
+        {
+            yr += aliased_sin(phase*h) * hht[i];
+            i++;
+        }
+        return yr;
     }
-    return yr;
-}
 
-float getSquare(float phase, float resolution)
-{
-    resolution *= 2.f;
-    float yr = aliased_sin(phase);
-    for(float h = 3.f; h < resolution; h+=2.f)
-        yr += aliased_sin(phase*h)/h;
-    return yr;
-}
-
-float getSawtooth(float phase, float resolution)
-{
-    float yr = aliased_sin(phase);
-    for(float h = 2.f; h <= resolution; h+=1.f)
-        yr += aliased_sin(phase*h)/h;
-    return yr;
-}
-
-float getTriangle(float phase, float resolution)
-{
-    resolution *= 2.f;
-    float yr = aliased_sin(phase);
-    float sign = -1.f;
-    for(float h = 3.f; h <= resolution; h+=2.f)
+    float getSquare(float phase, float resolution)
     {
-        yr += (aliased_sin(phase*h) / (h*h)) * sign;
-        sign *= -1.f;
+        resolution *= 2.f;
+        float yr = aliased_sin(phase);
+        int i = 0;
+        for(float h = 3.f; h < resolution; h+=2.f)
+        {
+            yr += aliased_sin(phase*h)*ht[i];
+            i++;
+        }
+        return yr;
     }
-    return yr;
-}
+
+    float getSawtooth(float phase, float resolution)
+    {
+        float yr = aliased_sin(phase);
+        int i = 0;
+        for(float h = 2.f; h <= resolution; h+=1.f)
+        {
+            yr += aliased_sin(phase*h)*ht[i];
+            i++;
+        }
+        return yr;
+    }
+
+    float getTriangle(float phase, float resolution)
+    {
+        resolution *= 2.f;
+        float yr = aliased_sin(phase);
+        float sign = -1.f;
+        int i = 0;
+        for(float h = 3.f; h <= resolution; h+=2.f)
+        {
+            yr += (aliased_sin(phase*h) * hht[i]) * sign;
+            sign *= -1.f;
+            i++;
+        }
+        return yr;
+    }
+#else
+    float getSlantSine(float phase, float resolution)
+    {
+        float yr = aliased_sin(phase);
+        for(float h = 3.f; h < resolution; h+=1.f)
+        {
+            yr += aliased_sin(phase*h) / (h*h);
+        }
+        return yr;
+    }
+
+    float getSquare(float phase, float resolution)
+    {
+        resolution *= 2.f;
+        float yr = aliased_sin(phase);
+        for(float h = 3.f; h < resolution; h+=2.f)
+            yr += aliased_sin(phase*h)/h;
+        return yr;
+    }
+
+    float getSawtooth(float phase, float resolution)
+    {
+        float yr = aliased_sin(phase);
+        for(float h = 2.f; h <= resolution; h+=1.f)
+            yr += aliased_sin(phase*h)/h;
+        return yr;
+    }
+
+    float getTriangle(float phase, float resolution)
+    {
+        resolution *= 2.f;
+        float yr = aliased_sin(phase);
+        float sign = -1.f;
+        for(float h = 3.f; h <= resolution; h+=2.f)
+        {
+            yr += (aliased_sin(phase*h) / (h*h)) * sign;
+            sign *= -1.f;
+        }
+        return yr;
+    }
+#endif
 
 // https://meettechniek.info/additional/additive-synthesis.html
 float getImpulse(float phase, float resolution)
