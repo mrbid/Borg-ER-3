@@ -22,10 +22,11 @@
 
 // generators
 float getSlantSine(float phase, float resolution);
-float getImpulse(float phase, float resolution);
 float getSquare(float phase, float resolution);
 float getSawtooth(float phase, float resolution);
 float getTriangle(float phase, float resolution);
+float getImpulse(float phase, float resolution);
+float getViolin(float phase, float resolution);
 float aliased_sin(float theta);
 
 // utility functions
