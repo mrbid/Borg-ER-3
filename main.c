@@ -1084,11 +1084,11 @@ int main(int argc, char *argv[])
     // load bank
     loadState();
 
-    //init audio
-    initMonoAudio(SAMPLE_RATE);
-
     // set reciprocal sample rate
     reciprocal_sample_rate = 1.f/(float)SAMPLE_RATE;
+
+    //init audio
+    initMonoAudio(SAMPLE_RATE);
 
     // test sample
     // setSampleLen(33);
