@@ -29,6 +29,7 @@
 #include "res.h"
 
 #define SAMPLE_RATE   44100
+float reciprocal_sample_rate = 0.f;
 
 //#define HERMITE_INTERPOLATE // makes no real audible difference
 
@@ -153,14 +154,10 @@ void loadState()
 float oscphase[8] = {0.f}; // oscillator phases
 float doOsc(Uint32 oscid, float input1, float input2)
 {
-    static float reciprocal_sample_rate = 0.f;
     float o = 0.f;
     float f = 0.f, a = 0.f, r = 0.f, t = 0.f;
     Uint8 input1_fmmod = 0, input1_ammod = 0, input1_mod = 0;
     Uint8 input2_fmmod = 0, input2_ammod = 0, input2_mod = 0;
-
-    if(reciprocal_sample_rate == 0)
-        reciprocal_sample_rate = 1.f/(float)SAMPLE_RATE;
 
     // load selected oscillator dial values with scaling
     if(oscid == 1)
@@ -180,6 +177,9 @@ float doOsc(Uint32 oscid, float input1, float input2)
     }
     else if(oscid == 2)
     {
+        // are any outputs enabled?
+        if(synth[selected_bank].am_state[8] + synth[selected_bank].mul_state[8] + synth[selected_bank].fm_state[8] == 0){return 0.f;}
+
         f = synth[selected_bank].dial_state[20] * dial_scale[20];
         a = synth[selected_bank].dial_state[21] * dial_scale[21];
         r = synth[selected_bank].dial_state[22] * dial_scale[22];
@@ -195,6 +195,9 @@ float doOsc(Uint32 oscid, float input1, float input2)
     }
     else if(oscid == 3)
     {
+        // are any outputs enabled?
+        if(synth[selected_bank].am_state[5] + synth[selected_bank].mul_state[5] + synth[selected_bank].fm_state[5] == 0){return 0.f;}
+
         f = synth[selected_bank].dial_state[24] * dial_scale[24];
         a = synth[selected_bank].dial_state[25] * dial_scale[25];
         r = synth[selected_bank].dial_state[26] * dial_scale[26];
@@ -210,6 +213,9 @@ float doOsc(Uint32 oscid, float input1, float input2)
     }
     else if(oscid == 4)
     {
+        // are any outputs enabled?
+        if(synth[selected_bank].am_state[2] + synth[selected_bank].mul_state[2] + synth[selected_bank].fm_state[2] == 0){return 0.f;}
+
         f = synth[selected_bank].dial_state[28] * dial_scale[28];
         a = synth[selected_bank].dial_state[29] * dial_scale[29];
         r = synth[selected_bank].dial_state[30] * dial_scale[30];
@@ -225,6 +231,9 @@ float doOsc(Uint32 oscid, float input1, float input2)
     }
     else if(oscid == 5)
     {
+        // are any outputs enabled?
+        if(synth[selected_bank].am_state[9] + synth[selected_bank].mul_state[9] + synth[selected_bank].fm_state[9] == 0){return 0.f;}
+
         f = synth[selected_bank].dial_state[0] * dial_scale[0];
         a = synth[selected_bank].dial_state[1] * dial_scale[1];
         r = synth[selected_bank].dial_state[2] * dial_scale[2];
@@ -240,6 +249,10 @@ float doOsc(Uint32 oscid, float input1, float input2)
     }
     else if(oscid == 6)
     {
+        // are any outputs enabled?
+        if( synth[selected_bank].am_state[6] + synth[selected_bank].mul_state[6] + synth[selected_bank].fm_state[6] +
+            synth[selected_bank].am_state[7] + synth[selected_bank].mul_state[7] + synth[selected_bank].fm_state[7] == 0){return 0.f;}
+
         f = synth[selected_bank].dial_state[4] * dial_scale[4];
         a = synth[selected_bank].dial_state[5] * dial_scale[5];
         r = synth[selected_bank].dial_state[6] * dial_scale[6];
@@ -255,6 +268,10 @@ float doOsc(Uint32 oscid, float input1, float input2)
     }
     else if(oscid == 7)
     {
+        // are any outputs enabled?
+        if( synth[selected_bank].am_state[3] + synth[selected_bank].mul_state[3] + synth[selected_bank].fm_state[3] +
+            synth[selected_bank].am_state[4] + synth[selected_bank].mul_state[4] + synth[selected_bank].fm_state[4] == 0){return 0.f;}
+
         f = synth[selected_bank].dial_state[8] * dial_scale[8];
         a = synth[selected_bank].dial_state[9] * dial_scale[9];
         r = synth[selected_bank].dial_state[10] * dial_scale[10];
@@ -270,6 +287,10 @@ float doOsc(Uint32 oscid, float input1, float input2)
     }
     else if(oscid == 8)
     {
+        // are any outputs enabled?
+        if( synth[selected_bank].am_state[0] + synth[selected_bank].mul_state[0] + synth[selected_bank].fm_state[0] +
+            synth[selected_bank].am_state[1] + synth[selected_bank].mul_state[1] + synth[selected_bank].fm_state[1] == 0){return 0.f;}
+
         f = synth[selected_bank].dial_state[12] * dial_scale[12];
         a = synth[selected_bank].dial_state[13] * dial_scale[13];
         r = synth[selected_bank].dial_state[14] * dial_scale[14];
@@ -1065,6 +1086,9 @@ int main(int argc, char *argv[])
 
     //init audio
     initMonoAudio(SAMPLE_RATE);
+
+    // set reciprocal sample rate
+    reciprocal_sample_rate = 1.f/(float)SAMPLE_RATE;
 
     // test sample
     // setSampleLen(33);
