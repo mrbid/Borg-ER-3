@@ -647,72 +647,72 @@ void drawText(SDL_Surface* o, const char* s, Uint32 x, Uint32 y, Uint8 colour)
     for(Uint32 i = 0; i < len; i++)
     {
         if(s[i] == 'A'){SDL_BlitSurface(font, &(SDL_Rect){0,0,7,9}, o, &dr); dr.x += 7+m;}
-        if(s[i] == 'B'){SDL_BlitSurface(font, &(SDL_Rect){8,0,6,9}, o, &dr); dr.x += 6+m;}
-        if(s[i] == 'C'){SDL_BlitSurface(font, &(SDL_Rect){15,0,6,9}, o, &dr); dr.x += 6+m;}
-        if(s[i] == 'D'){SDL_BlitSurface(font, &(SDL_Rect){22,0,7,9}, o, &dr); dr.x += 7+m;}
-        if(s[i] == 'E'){SDL_BlitSurface(font, &(SDL_Rect){30,0,5,9}, o, &dr); dr.x += 5+m;}
-        if(s[i] == 'F'){SDL_BlitSurface(font, &(SDL_Rect){36,0,5,9}, o, &dr); dr.x += 5+m;}
-        if(s[i] == 'G'){SDL_BlitSurface(font, &(SDL_Rect){42,0,7,9}, o, &dr); dr.x += 7+m;}
-        if(s[i] == 'H'){SDL_BlitSurface(font, &(SDL_Rect){50,0,7,9}, o, &dr); dr.x += 7+m;}
-        if(s[i] == 'I'){SDL_BlitSurface(font, &(SDL_Rect){58,0,4,9}, o, &dr); dr.x += 4+m;}
-        if(s[i] == 'J'){SDL_BlitSurface(font, &(SDL_Rect){63,0,5,9}, o, &dr); dr.x += 5+m;}
-        if(s[i] == 'K'){SDL_BlitSurface(font, &(SDL_Rect){69,0,6,9}, o, &dr); dr.x += 6+m;}
-        if(s[i] == 'L'){SDL_BlitSurface(font, &(SDL_Rect){76,0,5,9}, o, &dr); dr.x += 5+m;}
-        if(s[i] == 'M'){SDL_BlitSurface(font, &(SDL_Rect){82,0,9,9}, o, &dr); dr.x += 9+m;}
-        if(s[i] == 'N'){SDL_BlitSurface(font, &(SDL_Rect){92,0,6,9}, o, &dr); dr.x += 6+m;}
-        if(s[i] == 'O'){SDL_BlitSurface(font, &(SDL_Rect){99,0,7,9}, o, &dr); dr.x += 7+m;}
-        if(s[i] == 'P'){SDL_BlitSurface(font, &(SDL_Rect){107,0,6,9}, o, &dr); dr.x += 6+m;}
-        if(s[i] == 'Q'){SDL_BlitSurface(font, &(SDL_Rect){114,0,7,11}, o, &dr); dr.x += 7+m;}
-        if(s[i] == 'R'){SDL_BlitSurface(font, &(SDL_Rect){122,0,7,9}, o, &dr); dr.x += 7+m;}
-        if(s[i] == 'S'){SDL_BlitSurface(font, &(SDL_Rect){130,0,6,9}, o, &dr); dr.x += 6+m;}
-        if(s[i] == 'T'){SDL_BlitSurface(font, &(SDL_Rect){137,0,6,9}, o, &dr); dr.x += 6+m;}
-        if(s[i] == 'U'){SDL_BlitSurface(font, &(SDL_Rect){144,0,7,9}, o, &dr); dr.x += 7+m;}
-        if(s[i] == 'V'){SDL_BlitSurface(font, &(SDL_Rect){152,0,6,9}, o, &dr); dr.x += 6+m;}
-        if(s[i] == 'W'){SDL_BlitSurface(font, &(SDL_Rect){159,0,10,9}, o, &dr); dr.x += 10+m;}
-        if(s[i] == 'X'){SDL_BlitSurface(font, &(SDL_Rect){170,0,6,9}, o, &dr); dr.x += 6+m;}
-        if(s[i] == 'Y'){SDL_BlitSurface(font, &(SDL_Rect){177,0,6,9}, o, &dr); dr.x += 6+m;}
-        if(s[i] == 'Z'){SDL_BlitSurface(font, &(SDL_Rect){184,0,6,9}, o, &dr); dr.x += 6+m;}
-        if(s[i] == 'a'){SDL_BlitSurface(font, &(SDL_Rect){191,0,6,9}, o, &dr); dr.x += 6+m;}
-        if(s[i] == 'b'){SDL_BlitSurface(font, &(SDL_Rect){198,0,6,9}, o, &dr); dr.x += 6+m;}
-        if(s[i] == 'c'){SDL_BlitSurface(font, &(SDL_Rect){205,0,5,9}, o, &dr); dr.x += 5+m;}
-        if(s[i] == 'd'){SDL_BlitSurface(font, &(SDL_Rect){211,0,6,9}, o, &dr); dr.x += 6+m;}
-        if(s[i] == 'e'){SDL_BlitSurface(font, &(SDL_Rect){218,0,6,9}, o, &dr); dr.x += 6+m;}
-        if(s[i] == 'f'){SDL_BlitSurface(font, &(SDL_Rect){225,0,4,9}, o, &dr); dr.x += 3+m;}
-        if(s[i] == 'g'){SDL_BlitSurface(font, &(SDL_Rect){229,0,6,11}, o, &dr); dr.x += 6+m;}
-        if(s[i] == 'h'){SDL_BlitSurface(font, &(SDL_Rect){236,0,6,9}, o, &dr); dr.x += 6+m;}
-        if(s[i] == 'i'){SDL_BlitSurface(font, &(SDL_Rect){243,0,2,9}, o, &dr); dr.x += 2+m;}
-        if(s[i] == 'j'){SDL_BlitSurface(font, &(SDL_Rect){246,0,3,11}, o, &dr); dr.x += 3+m;}
-        if(s[i] == 'k'){SDL_BlitSurface(font, &(SDL_Rect){250,0,6,9}, o, &dr); dr.x += 6+m;}
-        if(s[i] == 'l'){SDL_BlitSurface(font, &(SDL_Rect){257,0,2,9}, o, &dr); dr.x += 2+m;}
-        if(s[i] == 'm'){SDL_BlitSurface(font, &(SDL_Rect){260,0,10,9}, o, &dr); dr.x += 10+m;}
-        if(s[i] == 'n'){SDL_BlitSurface(font, &(SDL_Rect){271,0,6,9}, o, &dr); dr.x += 6+m;}
-        if(s[i] == 'o'){SDL_BlitSurface(font, &(SDL_Rect){278,0,6,9}, o, &dr); dr.x += 6+m;}
-        if(s[i] == 'p'){SDL_BlitSurface(font, &(SDL_Rect){285,0,6,11}, o, &dr); dr.x += 6+m;}
-        if(s[i] == 'q'){SDL_BlitSurface(font, &(SDL_Rect){292,0,6,11}, o, &dr); dr.x += 6+m;}
-        if(s[i] == 'r'){SDL_BlitSurface(font, &(SDL_Rect){299,0,4,9}, o, &dr); dr.x += 4+m;}
-        if(s[i] == 's'){SDL_BlitSurface(font, &(SDL_Rect){304,0,5,9}, o, &dr); dr.x += 5+m;}
-        if(s[i] == 't'){SDL_BlitSurface(font, &(SDL_Rect){310,0,4,9}, o, &dr); dr.x += 4+m;}
-        if(s[i] == 'u'){SDL_BlitSurface(font, &(SDL_Rect){315,0,6,9}, o, &dr); dr.x += 6+m;}
-        if(s[i] == 'v'){SDL_BlitSurface(font, &(SDL_Rect){322,0,6,9}, o, &dr); dr.x += 6+m;}
-        if(s[i] == 'w'){SDL_BlitSurface(font, &(SDL_Rect){329,0,8,9}, o, &dr); dr.x += 8+m;}
-        if(s[i] == 'x'){SDL_BlitSurface(font, &(SDL_Rect){338,0,6,9}, o, &dr); dr.x += 6+m;}
-        if(s[i] == 'y'){SDL_BlitSurface(font, &(SDL_Rect){345,0,6,11}, o, &dr); dr.x += 6+m;}
-        if(s[i] == 'z'){SDL_BlitSurface(font, &(SDL_Rect){352,0,5,9}, o, &dr); dr.x += 5+m;}
-        if(s[i] == '0'){SDL_BlitSurface(font, &(SDL_Rect){358,0,6,9}, o, &dr); dr.x += 6+m;}
-        if(s[i] == '1'){SDL_BlitSurface(font, &(SDL_Rect){366,0,4,9}, o, &dr); dr.x += 4+m;}
-        if(s[i] == '2'){SDL_BlitSurface(font, &(SDL_Rect){372,0,6,9}, o, &dr); dr.x += 6+m;}
-        if(s[i] == '3'){SDL_BlitSurface(font, &(SDL_Rect){379,0,6,9}, o, &dr); dr.x += 6+m;}
-        if(s[i] == '4'){SDL_BlitSurface(font, &(SDL_Rect){386,0,6,9}, o, &dr); dr.x += 6+m;}
-        if(s[i] == '5'){SDL_BlitSurface(font, &(SDL_Rect){393,0,6,9}, o, &dr); dr.x += 6+m;}
-        if(s[i] == '6'){SDL_BlitSurface(font, &(SDL_Rect){400,0,6,9}, o, &dr); dr.x += 6+m;}
-        if(s[i] == '7'){SDL_BlitSurface(font, &(SDL_Rect){407,0,6,9}, o, &dr); dr.x += 6+m;}
-        if(s[i] == '8'){SDL_BlitSurface(font, &(SDL_Rect){414,0,6,9}, o, &dr); dr.x += 6+m;}
-        if(s[i] == '9'){SDL_BlitSurface(font, &(SDL_Rect){421,0,6,9}, o, &dr); dr.x += 6+m;}
-        if(s[i] == ':'){SDL_BlitSurface(font, &(SDL_Rect){428,0,2,9}, o, &dr); dr.x += 2+m;}
-        if(s[i] == '.'){SDL_BlitSurface(font, &(SDL_Rect){431,0,2,9}, o, &dr); dr.x += 2+m;}
-        if(s[i] == '+'){SDL_BlitSurface(font, &(SDL_Rect){435,0,7,9}, o, &dr); dr.x += 7+m;}
-        if(s[i] == '-'){SDL_BlitSurface(font, &(SDL_Rect){443,0,4,9}, o, &dr); dr.x += 4+m;}
-        if(s[i] == ' '){dr.x += 2+m;}
+        else if(s[i] == 'B'){SDL_BlitSurface(font, &(SDL_Rect){8,0,6,9}, o, &dr); dr.x += 6+m;}
+        else if(s[i] == 'C'){SDL_BlitSurface(font, &(SDL_Rect){15,0,6,9}, o, &dr); dr.x += 6+m;}
+        else if(s[i] == 'D'){SDL_BlitSurface(font, &(SDL_Rect){22,0,7,9}, o, &dr); dr.x += 7+m;}
+        else if(s[i] == 'E'){SDL_BlitSurface(font, &(SDL_Rect){30,0,5,9}, o, &dr); dr.x += 5+m;}
+        else if(s[i] == 'F'){SDL_BlitSurface(font, &(SDL_Rect){36,0,5,9}, o, &dr); dr.x += 5+m;}
+        else if(s[i] == 'G'){SDL_BlitSurface(font, &(SDL_Rect){42,0,7,9}, o, &dr); dr.x += 7+m;}
+        else if(s[i] == 'H'){SDL_BlitSurface(font, &(SDL_Rect){50,0,7,9}, o, &dr); dr.x += 7+m;}
+        else if(s[i] == 'I'){SDL_BlitSurface(font, &(SDL_Rect){58,0,4,9}, o, &dr); dr.x += 4+m;}
+        else if(s[i] == 'J'){SDL_BlitSurface(font, &(SDL_Rect){63,0,5,9}, o, &dr); dr.x += 5+m;}
+        else if(s[i] == 'K'){SDL_BlitSurface(font, &(SDL_Rect){69,0,6,9}, o, &dr); dr.x += 6+m;}
+        else if(s[i] == 'L'){SDL_BlitSurface(font, &(SDL_Rect){76,0,5,9}, o, &dr); dr.x += 5+m;}
+        else if(s[i] == 'M'){SDL_BlitSurface(font, &(SDL_Rect){82,0,9,9}, o, &dr); dr.x += 9+m;}
+        else if(s[i] == 'N'){SDL_BlitSurface(font, &(SDL_Rect){92,0,6,9}, o, &dr); dr.x += 6+m;}
+        else if(s[i] == 'O'){SDL_BlitSurface(font, &(SDL_Rect){99,0,7,9}, o, &dr); dr.x += 7+m;}
+        else if(s[i] == 'P'){SDL_BlitSurface(font, &(SDL_Rect){107,0,6,9}, o, &dr); dr.x += 6+m;}
+        else if(s[i] == 'Q'){SDL_BlitSurface(font, &(SDL_Rect){114,0,7,11}, o, &dr); dr.x += 7+m;}
+        else if(s[i] == 'R'){SDL_BlitSurface(font, &(SDL_Rect){122,0,7,9}, o, &dr); dr.x += 7+m;}
+        else if(s[i] == 'S'){SDL_BlitSurface(font, &(SDL_Rect){130,0,6,9}, o, &dr); dr.x += 6+m;}
+        else if(s[i] == 'T'){SDL_BlitSurface(font, &(SDL_Rect){137,0,6,9}, o, &dr); dr.x += 6+m;}
+        else if(s[i] == 'U'){SDL_BlitSurface(font, &(SDL_Rect){144,0,7,9}, o, &dr); dr.x += 7+m;}
+        else if(s[i] == 'V'){SDL_BlitSurface(font, &(SDL_Rect){152,0,6,9}, o, &dr); dr.x += 6+m;}
+        else if(s[i] == 'W'){SDL_BlitSurface(font, &(SDL_Rect){159,0,10,9}, o, &dr); dr.x += 10+m;}
+        else if(s[i] == 'X'){SDL_BlitSurface(font, &(SDL_Rect){170,0,6,9}, o, &dr); dr.x += 6+m;}
+        else if(s[i] == 'Y'){SDL_BlitSurface(font, &(SDL_Rect){177,0,6,9}, o, &dr); dr.x += 6+m;}
+        else if(s[i] == 'Z'){SDL_BlitSurface(font, &(SDL_Rect){184,0,6,9}, o, &dr); dr.x += 6+m;}
+        else if(s[i] == 'a'){SDL_BlitSurface(font, &(SDL_Rect){191,0,6,9}, o, &dr); dr.x += 6+m;}
+        else if(s[i] == 'b'){SDL_BlitSurface(font, &(SDL_Rect){198,0,6,9}, o, &dr); dr.x += 6+m;}
+        else if(s[i] == 'c'){SDL_BlitSurface(font, &(SDL_Rect){205,0,5,9}, o, &dr); dr.x += 5+m;}
+        else if(s[i] == 'd'){SDL_BlitSurface(font, &(SDL_Rect){211,0,6,9}, o, &dr); dr.x += 6+m;}
+        else if(s[i] == 'e'){SDL_BlitSurface(font, &(SDL_Rect){218,0,6,9}, o, &dr); dr.x += 6+m;}
+        else if(s[i] == 'f'){SDL_BlitSurface(font, &(SDL_Rect){225,0,4,9}, o, &dr); dr.x += 3+m;}
+        else if(s[i] == 'g'){SDL_BlitSurface(font, &(SDL_Rect){229,0,6,11}, o, &dr); dr.x += 6+m;}
+        else if(s[i] == 'h'){SDL_BlitSurface(font, &(SDL_Rect){236,0,6,9}, o, &dr); dr.x += 6+m;}
+        else if(s[i] == 'i'){SDL_BlitSurface(font, &(SDL_Rect){243,0,2,9}, o, &dr); dr.x += 2+m;}
+        else if(s[i] == 'j'){SDL_BlitSurface(font, &(SDL_Rect){246,0,3,11}, o, &dr); dr.x += 3+m;}
+        else if(s[i] == 'k'){SDL_BlitSurface(font, &(SDL_Rect){250,0,6,9}, o, &dr); dr.x += 6+m;}
+        else if(s[i] == 'l'){SDL_BlitSurface(font, &(SDL_Rect){257,0,2,9}, o, &dr); dr.x += 2+m;}
+        else if(s[i] == 'm'){SDL_BlitSurface(font, &(SDL_Rect){260,0,10,9}, o, &dr); dr.x += 10+m;}
+        else if(s[i] == 'n'){SDL_BlitSurface(font, &(SDL_Rect){271,0,6,9}, o, &dr); dr.x += 6+m;}
+        else if(s[i] == 'o'){SDL_BlitSurface(font, &(SDL_Rect){278,0,6,9}, o, &dr); dr.x += 6+m;}
+        else if(s[i] == 'p'){SDL_BlitSurface(font, &(SDL_Rect){285,0,6,11}, o, &dr); dr.x += 6+m;}
+        else if(s[i] == 'q'){SDL_BlitSurface(font, &(SDL_Rect){292,0,6,11}, o, &dr); dr.x += 6+m;}
+        else if(s[i] == 'r'){SDL_BlitSurface(font, &(SDL_Rect){299,0,4,9}, o, &dr); dr.x += 4+m;}
+        else if(s[i] == 's'){SDL_BlitSurface(font, &(SDL_Rect){304,0,5,9}, o, &dr); dr.x += 5+m;}
+        else if(s[i] == 't'){SDL_BlitSurface(font, &(SDL_Rect){310,0,4,9}, o, &dr); dr.x += 4+m;}
+        else if(s[i] == 'u'){SDL_BlitSurface(font, &(SDL_Rect){315,0,6,9}, o, &dr); dr.x += 6+m;}
+        else if(s[i] == 'v'){SDL_BlitSurface(font, &(SDL_Rect){322,0,6,9}, o, &dr); dr.x += 6+m;}
+        else if(s[i] == 'w'){SDL_BlitSurface(font, &(SDL_Rect){329,0,8,9}, o, &dr); dr.x += 8+m;}
+        else if(s[i] == 'x'){SDL_BlitSurface(font, &(SDL_Rect){338,0,6,9}, o, &dr); dr.x += 6+m;}
+        else if(s[i] == 'y'){SDL_BlitSurface(font, &(SDL_Rect){345,0,6,11}, o, &dr); dr.x += 6+m;}
+        else if(s[i] == 'z'){SDL_BlitSurface(font, &(SDL_Rect){352,0,5,9}, o, &dr); dr.x += 5+m;}
+        else if(s[i] == '0'){SDL_BlitSurface(font, &(SDL_Rect){358,0,6,9}, o, &dr); dr.x += 6+m;}
+        else if(s[i] == '1'){SDL_BlitSurface(font, &(SDL_Rect){366,0,4,9}, o, &dr); dr.x += 4+m;}
+        else if(s[i] == '2'){SDL_BlitSurface(font, &(SDL_Rect){372,0,6,9}, o, &dr); dr.x += 6+m;}
+        else if(s[i] == '3'){SDL_BlitSurface(font, &(SDL_Rect){379,0,6,9}, o, &dr); dr.x += 6+m;}
+        else if(s[i] == '4'){SDL_BlitSurface(font, &(SDL_Rect){386,0,6,9}, o, &dr); dr.x += 6+m;}
+        else if(s[i] == '5'){SDL_BlitSurface(font, &(SDL_Rect){393,0,6,9}, o, &dr); dr.x += 6+m;}
+        else if(s[i] == '6'){SDL_BlitSurface(font, &(SDL_Rect){400,0,6,9}, o, &dr); dr.x += 6+m;}
+        else if(s[i] == '7'){SDL_BlitSurface(font, &(SDL_Rect){407,0,6,9}, o, &dr); dr.x += 6+m;}
+        else if(s[i] == '8'){SDL_BlitSurface(font, &(SDL_Rect){414,0,6,9}, o, &dr); dr.x += 6+m;}
+        else if(s[i] == '9'){SDL_BlitSurface(font, &(SDL_Rect){421,0,6,9}, o, &dr); dr.x += 6+m;}
+        else if(s[i] == ':'){SDL_BlitSurface(font, &(SDL_Rect){428,0,2,9}, o, &dr); dr.x += 2+m;}
+        else if(s[i] == '.'){SDL_BlitSurface(font, &(SDL_Rect){431,0,2,9}, o, &dr); dr.x += 2+m;}
+        else if(s[i] == '+'){SDL_BlitSurface(font, &(SDL_Rect){435,0,7,9}, o, &dr); dr.x += 7+m;}
+        else if(s[i] == '-'){SDL_BlitSurface(font, &(SDL_Rect){443,0,4,9}, o, &dr); dr.x += 4+m;}
+        else if(s[i] == ' '){dr.x += 2+m;}
     }
 }
 
