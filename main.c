@@ -1170,7 +1170,7 @@ int main(int argc, char *argv[])
     }
 
     // credit
-    printf("Borg ER-3 by James William Fletcher (v1.0.2)\n");
+    printf("Borg ER-3 by James William Fletcher (v1.0.2)\n\n");
 
     // get app dir
     basedir = SDL_GetBasePath();
