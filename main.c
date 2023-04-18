@@ -1199,6 +1199,7 @@ int main(int argc, char *argv[])
     printf("Adjust the dials by left clicking and dragging or hovering and scrolling mouse 3 in the Y axis.\n");
     printf("\n");
     printf("Binds to play audio: spacebar, mouse3, mouse4\n");
+    printf("Flip sign of dial: mouse3, mouse4\n");
     printf("Reset envelope: right click on it\n");
     printf("Scroll dial sensitivity selection: right click, three sensitvity options\n");
     printf("\n");
