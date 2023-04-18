@@ -370,7 +370,7 @@ float doOsc(Uint32 oscid, float input1, float input2)
         d1 *= 6.f;
         d2 *= 6.f;
         o = (getSlantSine(oscphase[oscid], r) * a) * d1;
-        if(t > 0)
+        if(t > 0.1666666716f)
         {
             o += (getSquare(oscphase[oscid], r) * a) * d2;
         }
@@ -382,7 +382,7 @@ float doOsc(Uint32 oscid, float input1, float input2)
         d1 *= 6.f;
         d2 *= 6.f;
         o = (getSquare(oscphase[oscid], r) * a) * d1;
-        if(t > 0)
+        if(t > 0.3333333433f)
         {
             o += (getSawtooth(oscphase[oscid], r) * a) * d2;
         }
@@ -394,7 +394,7 @@ float doOsc(Uint32 oscid, float input1, float input2)
         d1 *= 6.f;
         d2 *= 6.f;
         o = (getSawtooth(oscphase[oscid], r) * a) * d1;
-        if(t > 0)
+        if(t > 0.50f)
         {
             o += (getTriangle(oscphase[oscid], r) * a) * d2;
         }
@@ -406,7 +406,7 @@ float doOsc(Uint32 oscid, float input1, float input2)
         d1 *= 6.f;
         d2 *= 6.f;
         o = (getTriangle(oscphase[oscid], r) * a) * d1;
-        if(t > 0)
+        if(t > 0.6666666865f)
         {
             o += (getImpulse(oscphase[oscid], r) * a) * d2;
         }
@@ -418,7 +418,7 @@ float doOsc(Uint32 oscid, float input1, float input2)
         d1 *= 6.f;
         d2 *= 6.f;
         o = (getImpulse(oscphase[oscid], r) * a) * d1;
-        if(t > 0)
+        if(t > 0.8333333731f)
         {
             o += (getViolin(oscphase[oscid], r) * a) * d2;
         }
