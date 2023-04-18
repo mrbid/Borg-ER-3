@@ -1523,7 +1523,18 @@ int main(int argc, char *argv[])
                     }
                     else if(event.button.button == SDL_BUTTON_X1 || event.button.button == SDL_BUTTON_MIDDLE)
                     {
-                        doSynth(1);
+                        Uint8 wd = 1;
+                        for(int i = 0; i < 50; i++)
+                        {
+                            if(ui.dial_hover[i] == 1)
+                            {
+                                synth[selected_bank].dial_state[i] *= -1;
+                                wd = 0;
+                                break;
+                            }
+                        }
+                        
+                        doSynth(wd);
                         render(screen);
                     }
                     else if(event.button.button == SDL_BUTTON_LEFT)
