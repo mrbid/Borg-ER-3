@@ -360,7 +360,19 @@ float doOsc(Uint32 oscid, float input1, float input2)
         o = (aliased_sin(oscphase[oscid]) * a) * d1;
         if(t > 0)
         {
-            o += (getSlantSine(oscphase[oscid], r) * a) * d2;
+            float tr, rb, rd;
+            modff(r, &rb);
+            rd = r-rb;
+            if(r < 29.f && rd > 0.f)
+            {
+                tr =  getSlantSine(oscphase[oscid], rb) * (1.f-rd);
+                tr += getSlantSine(oscphase[oscid], rb+1.f) * rd;
+            }
+            else
+            {
+                tr = getSlantSine(oscphase[oscid], r);
+            }
+            o += (tr * a) * d2;
         }
     }
     else if(t <= 0.3333333433f)
@@ -369,10 +381,34 @@ float doOsc(Uint32 oscid, float input1, float input2)
         float d2 = 0.1666666716f - d1;
         d1 *= 6.f;
         d2 *= 6.f;
-        o = (getSlantSine(oscphase[oscid], r) * a) * d1;
+
+        float tr, rb, rd;
+        modff(r, &rb);
+        rd = r-rb;
+
+        if(r < 29.f && rd > 0.f)
+        {
+            tr =  getSlantSine(oscphase[oscid], rb) * (1.f-rd);
+            tr += getSlantSine(oscphase[oscid], rb+1.f) * rd;
+        }
+        else
+        {
+            tr = getSlantSine(oscphase[oscid], r);
+        }
+        o = (tr * a) * d1;
+
         if(t > 0.1666666716f)
         {
-            o += (getSquare(oscphase[oscid], r) * a) * d2;
+            if(r < 29.f && rd > 0.f)
+            {
+                tr =  getSquare(oscphase[oscid], rb) * (1.f-rd);
+                tr += getSquare(oscphase[oscid], rb+1.f) * rd;
+            }
+            else
+            {
+                tr = getSquare(oscphase[oscid], r);
+            }
+            o += (tr * a) * d2;
         }
     }
     else if(t <= 0.50f)
@@ -381,10 +417,34 @@ float doOsc(Uint32 oscid, float input1, float input2)
         float d2 = 0.1666666716f - d1;
         d1 *= 6.f;
         d2 *= 6.f;
-        o = (getSquare(oscphase[oscid], r) * a) * d1;
+
+        float tr, rb, rd;
+        modff(r, &rb);
+        rd = r-rb;
+
+        if(r < 29.f && rd > 0.f)
+        {
+            tr =  getSquare(oscphase[oscid], rb) * (1.f-rd);
+            tr += getSquare(oscphase[oscid], rb+1.f) * rd;
+        }
+        else
+        {
+            tr = getSquare(oscphase[oscid], r);
+        }
+        o = (tr * a) * d1;
+
         if(t > 0.3333333433f)
         {
-            o += (getSawtooth(oscphase[oscid], r) * a) * d2;
+            if(r < 29.f && rd > 0.f)
+            {
+                tr =  getSawtooth(oscphase[oscid], rb) * (1.f-rd);
+                tr += getSawtooth(oscphase[oscid], rb+1.f) * rd;
+            }
+            else
+            {
+                tr = getSawtooth(oscphase[oscid], r);
+            }
+            o += (tr * a) * d2;
         }
     }
     else if(t <= 0.6666666865f)
@@ -393,10 +453,34 @@ float doOsc(Uint32 oscid, float input1, float input2)
         float d2 = 0.1666666716f - d1;
         d1 *= 6.f;
         d2 *= 6.f;
-        o = (getSawtooth(oscphase[oscid], r) * a) * d1;
+
+        float tr, rb, rd;
+        modff(r, &rb);
+        rd = r-rb;
+
+        if(r < 29.f && rd > 0.f)
+        {
+            tr =  getSawtooth(oscphase[oscid], rb) * (1.f-rd);
+            tr += getSawtooth(oscphase[oscid], rb+1.f) * rd;
+        }
+        else
+        {
+            tr = getSawtooth(oscphase[oscid], r);
+        }
+        o = (tr * a) * d1;
+        
         if(t > 0.50f)
         {
-            o += (getTriangle(oscphase[oscid], r) * a) * d2;
+            if(r < 29.f && rd > 0.f)
+            {
+                tr =  getTriangle(oscphase[oscid], rb) * (1.f-rd);
+                tr += getTriangle(oscphase[oscid], rb+1.f) * rd;
+            }
+            else
+            {
+                tr = getTriangle(oscphase[oscid], r);
+            }
+            o += (tr * a) * d2;
         }
     }
     else if(t <= 0.8333333731f)
@@ -405,10 +489,34 @@ float doOsc(Uint32 oscid, float input1, float input2)
         float d2 = 0.1666666716f - d1;
         d1 *= 6.f;
         d2 *= 6.f;
-        o = (getTriangle(oscphase[oscid], r) * a) * d1;
+
+        float tr, rb, rd;
+        modff(r, &rb);
+        rd = r-rb;
+
+        if(r < 29.f && rd > 0.f)
+        {
+            tr =  getTriangle(oscphase[oscid], rb) * (1.f-rd);
+            tr += getTriangle(oscphase[oscid], rb+1.f) * rd;
+        }
+        else
+        {
+            tr = getTriangle(oscphase[oscid], r);
+        }
+        o = (tr * a) * d1;
+        
         if(t > 0.6666666865f)
         {
-            o += (getImpulse(oscphase[oscid], r) * a) * d2;
+            if(r < 29.f && rd > 0.f)
+            {
+                tr =  getImpulse(oscphase[oscid], rb) * (1.f-rd);
+                tr += getImpulse(oscphase[oscid], rb+1.f) * rd;
+            }
+            else
+            {
+                tr = getImpulse(oscphase[oscid], r);
+            }
+            o += (tr * a) * d2;
         }
     }
     else
@@ -417,10 +525,34 @@ float doOsc(Uint32 oscid, float input1, float input2)
         float d2 = 0.1666666716f - d1;
         d1 *= 6.f;
         d2 *= 6.f;
-        o = (getImpulse(oscphase[oscid], r) * a) * d1;
+
+        float tr, rb, rd;
+        modff(r, &rb);
+        rd = r-rb;
+
+        if(r < 29.f && rd > 0.f)
+        {
+            tr =  getImpulse(oscphase[oscid], rb) * (1.f-rd);
+            tr += getImpulse(oscphase[oscid], rb+1.f) * rd;
+        }
+        else
+        {
+            tr = getImpulse(oscphase[oscid], r);
+        }
+        o = (tr * a) * d1;
+        
         if(t > 0.8333333731f)
         {
-            o += (getViolin(oscphase[oscid], r) * a) * d2;
+            if(r < 29.f && rd > 0.f)
+            {
+                tr =  getViolin(oscphase[oscid], rb) * (1.f-rd);
+                tr += getViolin(oscphase[oscid], rb+1.f) * rd;
+            }
+            else
+            {
+                tr = getViolin(oscphase[oscid], r);
+            }
+            o += (tr * a) * d2;
         }
     }
 
@@ -1038,7 +1170,7 @@ int main(int argc, char *argv[])
     }
 
     // credit
-    printf("Borg ER-3 by James William Fletcher\n");
+    printf("Borg ER-3 by James William Fletcher (v1.0.2)\n");
 
     // get app dir
     basedir = SDL_GetBasePath();
