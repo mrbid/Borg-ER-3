@@ -1529,7 +1529,8 @@ int main(int argc, char *argv[])
                         {
                             if(ui.dial_hover[i] == 1)
                             {
-                                synth[selected_bank].dial_state[i] *= -1;
+                                if(dial_neg[i] == 1)
+                                    synth[selected_bank].dial_state[i] *= -1;
                                 wd = 0;
                                 break;
                             }
