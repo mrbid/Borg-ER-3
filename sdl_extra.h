@@ -213,7 +213,7 @@ float maxf(float x, float y)
 float wrapf(float f)
 {
     if(f < 0.f){return f + 1.0f;}
-    if(f > 1.f){return f - 1.0f;}
+    else if(f > 1.f){return f - 1.0f;}
     return f;
 }
 
