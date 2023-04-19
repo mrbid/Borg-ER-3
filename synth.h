@@ -168,9 +168,10 @@ inline float aliased_cos(float theta)
     }
 #endif
 
-// https://meettechniek.info/additional/additive-synthesis.html
 float getImpulse(float phase, float resolution)
 {
+    // https://meettechniek.info/additional/additive-synthesis.html
+
     float yr = 0.f;
     
     // if(resolution >= 0){yr += aliased_sin(phase);}
@@ -197,9 +198,9 @@ float getImpulse(float phase, float resolution)
     return yr;
 }
 
-// https://meettechniek.info/additional/additive-synthesis.html
 float getViolin(float phase, float resolution)
 {
+    // https://meettechniek.info/additional/additive-synthesis.html
     float yr = 0.f;
     if(resolution >= 0 ){yr += aliased_sin(phase)       * 0.995f;}
     if(resolution >= 4 ){yr += aliased_cos(phase * 2.f) * 0.940f;}
@@ -212,7 +213,7 @@ float getViolin(float phase, float resolution)
     return yr;
 }
 
-
+// --------------------------------------------- >
 
 inline float Hz(float hz)
 {
