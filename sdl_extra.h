@@ -351,7 +351,7 @@ void SDL_OpacityBlit(const SDL_Surface* in, SDL_Surface* out, Uint32 ix, Uint32 
 }
 
 
-//Draws an alpha blended rectangle
+// draws an alpha blended rectangle
 void SDL_FillRectAlpha(SDL_Surface* surf, const SDL_Rect* r, Uint32 colour, float alpha)
 {	 
     for(Uint32 x = r->x; x < r->x+r->w; x++)
