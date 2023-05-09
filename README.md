@@ -31,7 +31,7 @@ https://snapcraft.io/borger3
 
 ## Latest Release
 *Windows, Linux, Deb, AppImage, etc*<br>
-https://github.com/mrbid/Borg-ER-3/releases/tag/1.0
+https://github.com/mrbid/Borg-ER-3/releases/tag/1.0.2
 
 ## Build Instructions
 ```
