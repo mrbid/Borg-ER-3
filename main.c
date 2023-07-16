@@ -114,17 +114,8 @@ void saveState()
     FILE* f = fopen(file, "wb");
     if(f != NULL)
     {
-        unsigned int strikeout = 0;
-        while(fwrite(&synth[0], sizeof(struct ssynth), 256, f) != 256)
-        {
-            printf("Writing bank failed... Trying again.\n");
-            strikeout++;
-            if(strikeout > 3333)
-            {
-                printf("Saving your data totally failed. Outch. :(\n");
-                break;
-            }
-        }
+        if(fwrite(&synth[0], sizeof(struct ssynth), 256, f) != 256)
+            printf("fwrite() wrote the wrong amount of bytes, save corrupted.\n");
         fclose(f);
     }
 }
