@@ -1193,6 +1193,7 @@ int main(int argc, char *argv[])
     printf("Flip sign of dial: mouse3, mouse4\n");
     printf("Reset envelope: right click on it\n");
     printf("Scroll dial sensitivity selection: right click, three sensitvity options\n");
+    printf("Reset/disable multiple selection button: right click on button\n");
     printf("\n");
     printf("BIQUADS are executed from left to right, first BIQUAD 1, then 2, then 3.\n");
     printf("\n");
@@ -1200,7 +1201,6 @@ int main(int argc, char *argv[])
     printf("\n");
     printf("Source: https://github.com/mrbid/Borg-ER-3\n");
     printf("https://meettechniek.info/additional/additive-synthesis.html\n\n");
-    
 
     // load assets
     loadAssets(screen);
@@ -1487,6 +1487,50 @@ int main(int argc, char *argv[])
 
                     if(event.button.button == SDL_BUTTON_RIGHT)
                     {
+                        Uint8 sc = 0;
+                        if(sc == 0)
+                        {
+                            for(int i = 0; i < 10; i++)
+                            {
+                                if(ui.am_hover[i] == 1)
+                                {
+                                    sc=1;
+                                    synth[selected_bank].am_state[i] = 0;
+                                    doSynth(0);
+                                    render(screen);
+                                    break;
+                                }
+                            }
+                        }
+                        if(sc == 0)
+                        {
+                            for(int i = 0; i < 10; i++)
+                            {
+                                if(ui.mul_hover[i] == 1)
+                                {
+                                    sc=1;
+                                    synth[selected_bank].mul_state[i] = 0;
+                                    doSynth(0);
+                                    render(screen);
+                                    break;
+                                }
+                            }
+                        }
+                        if(sc == 0)
+                        {
+                            for(int i = 0; i < 10; i++)
+                            {
+                                if(ui.fm_hover[i] == 1)
+                                {
+                                    sc=1;
+                                    synth[selected_bank].fm_state[i] = 0;
+                                    doSynth(0);
+                                    render(screen);
+                                    break;
+                                }
+                            }
+                        }
+
                         // reset envelope
                         if(x > 6 && x < 473 && y > 155 && y < 282)
                         {
