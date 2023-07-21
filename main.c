@@ -1487,6 +1487,7 @@ int main(int argc, char *argv[])
 
                     if(event.button.button == SDL_BUTTON_RIGHT)
                     {
+                        // check right click on multiple-selection buttons
                         Uint8 sc = 0;
                         if(sc == 0)
                         {
