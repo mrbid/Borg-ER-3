@@ -888,29 +888,29 @@ void render(SDL_Surface* screen)
     if(selected_bank < 10)
     {
         sprintf(val, "%d", selected_bank);
-        drawText(bb, val, 39, 418, 0);
+        drawText(bb, val, 39, 418);
     }
     else if(selected_bank < 100)
     {
         sprintf(val, "%d", selected_bank);
-        drawText(bb, val, 36, 418, 0);
+        drawText(bb, val, 36, 418);
     }
     else
     {
         sprintf(val, "%d", selected_bank);
-        drawText(bb, val, 33, 418, 0);
+        drawText(bb, val, 33, 418);
     }
 
     // draw sec len
     if(synth[selected_bank].seclen < 10)
     {
         sprintf(val, "%d Sec", synth[selected_bank].seclen);
-        drawText(bb, val, 327, 418, 0);
+        drawText(bb, val, 327, 418);
     }
     else if(synth[selected_bank].seclen < 100)
     {
         sprintf(val, "%d Sec", synth[selected_bank].seclen);
-        drawText(bb, val, 325, 418, 0);
+        drawText(bb, val, 325, 418);
     }
 
     // envelope & oscilloscope
@@ -969,7 +969,7 @@ void render(SDL_Surface* screen)
             ih=1;
             
             sprintf(val, "Value: %+.2f", synth[selected_bank].dial_state[i] * dial_scale[i]);
-            drawText(bb, val, 11, 397, 1);
+            drawText(bb, val, 11, 397);
 
             if(select_mode == 0)
                 setColourLightness(bb, dial_rect[i], scopecolor, select_lightness);
@@ -1074,7 +1074,7 @@ void render(SDL_Surface* screen)
         static char tval[256];
         if(themeon == 2)
         {
-            drawText(bb, tval, 319, 288, 1); // 321, 288 :: 145, 329
+            drawText(bb, tval, 319, 288); // 321, 288 :: 145, 329
             if(SDL_GetTicks() > st)
             {
                 st = 0;
@@ -1749,7 +1749,7 @@ int main(int argc, char *argv[])
                     SDL_FreeSurface(s_minus);
                     SDL_FreeSurface(s_mul);
                     SDL_CursorPointer(1337);
-                    drawText(NULL, "*K", 0, 0, 0);
+                    drawText(NULL, "*K", 0, 0);
                     SDL_DestroyWindow(window);
                     SDL_CloseAudio();
                     SDL_Quit();
