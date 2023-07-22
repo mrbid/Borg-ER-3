@@ -25,8 +25,7 @@ SDL_Surface* SDL_RGBA32Surface(Uint32 w, Uint32 h);
 
 // font
 void drawText(SDL_Surface* surface, const char* s, Uint32 x, Uint32 y);
-// to cleanup / destroy buffers: drawText(NULL, "*K", 0, 0, 0);
-// colours: 0 = black, 1 = white (use replaceColour for extended colour sets)
+// to cleanup / destroy buffers: drawText(NULL, "*K", 0, 0);
 
 // set/get pixel for all (source: SDL wiki ~2006)
 Uint32 SDL_GetPixel(const SDL_Surface *surface, Uint32 x, Uint32 y);
@@ -64,7 +63,6 @@ void setAreaDarkness(SDL_Surface* surface, SDL_Rect r, Uint8 dark);
 void bmpToArray(const char* file); // gimp export to .c is generally a better option
 void dataToSurface(SDL_Surface* surface, const Uint32* data, Uint32 w, Uint32 h);
 SDL_Surface* surfaceFromData(const Uint32* data, Uint32 w, Uint32 h);
-
 
 /*
     Fun-ctions
@@ -349,7 +347,6 @@ void SDL_OpacityBlit(const SDL_Surface* in, SDL_Surface* out, Uint32 ix, Uint32 
         }
     }
 }
-
 
 // draws an alpha blended rectangle
 void SDL_FillRectAlpha(SDL_Surface* surf, const SDL_Rect* r, Uint32 colour, float alpha)
