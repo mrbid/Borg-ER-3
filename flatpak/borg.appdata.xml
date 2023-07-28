@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+?xml version="1.0" encoding="UTF-8"?>
 <application>
 	<id type="desktop">borg.desktop</id>
 	<metadata_license>CC-BY-4.0</metadata_license>
@@ -10,11 +10,11 @@
 		<p>The envelope can be clicked and dragged into any shape, and the biquads can be manually configured on a per coefficient basis, they are executed in sequential order so BIQUAD 1 executes first.</p>
 	</description>
 	<screenshots>
-		<screenshot>https://dashboard.snapcraft.io/site_media/appmedia/2021/09/Screenshot_2sss.png</screenshot>
+		<screenshot>https://dashboard.snapcraft.io/site_media/appmedia/2023/01/borger3_eyBQLNu.png</screenshot>
 	</screenshots>
 	<url type="homepage">https://github.com/mrbid/Borg-ER-3</url>
 	<releases>
-		<release version="1.0" date="2023-01-29" />
+		<release version="1.0.2" date="2023-07-28" />
 	</releases>
 	<content_rating type="oars-1.0" />
 </application>
