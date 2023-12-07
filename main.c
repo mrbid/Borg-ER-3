@@ -73,17 +73,17 @@ Uint8 envelope_enabled = 0;
 
 float scope_zoom = 466.f;
 
-SDL_Rect screen_rect = {0, 0, 480, 435};
-SDL_Rect bankl_rect = {6, 416, 12, 14};
-SDL_Rect bankr_rect = {66, 416, 12, 14};
-SDL_Rect load_rect = {80, 416, 46, 14};
-SDL_Rect save_rect = {128, 416, 46, 14};
-SDL_Rect theme_rect = {218, 417, 44, 12};
-SDL_Rect secl_rect = {306, 416, 12, 14};
-SDL_Rect secr_rect = {366, 416, 12, 14};
-SDL_Rect export_rect = {380, 416, 46, 14};
-SDL_Rect play_rect = {428, 416, 46, 14};
-SDL_Rect envelope_rect = {7, 155, 466, 126};
+SDL_Rect screen_rect    = {0, 0, 480, 435};
+SDL_Rect bankl_rect     = {6, 416, 12, 14};
+SDL_Rect bankr_rect     = {66, 416, 12, 14};
+SDL_Rect load_rect      = {80, 416, 46, 14};
+SDL_Rect save_rect      = {128, 416, 46, 14};
+SDL_Rect theme_rect     = {218, 417, 44, 12};
+SDL_Rect secl_rect      = {306, 416, 12, 14};
+SDL_Rect secr_rect      = {366, 416, 12, 14};
+SDL_Rect export_rect    = {380, 416, 46, 14};
+SDL_Rect play_rect      = {428, 416, 46, 14};
+SDL_Rect envelope_rect  = {7, 155, 466, 126};
 
 SDL_Rect dial_rect[50];
 SDL_Rect mul_rect[10];
@@ -1169,7 +1169,7 @@ int main(int argc, char *argv[])
     printf("basePath: %s\n", basedir);
     printf("prefPath: %s\n", appdir);
 #ifdef __linux__
-    printf("exportPath: %s/Documents/Borg_ER-3\n\n", getenv("HOME"));
+    printf("exportPath: %s/EXPORTS/Borg_ER-3\n\n", getenv("HOME"));
 #endif
 
     // sdl version
@@ -1243,7 +1243,7 @@ int main(int argc, char *argv[])
     render(screen);
 
     // event loop
-    static Sint32 x, y;
+    static Sint32 x, y, rx, ry;
     while(1)
     {
         SDL_Event event;
@@ -1298,8 +1298,6 @@ int main(int argc, char *argv[])
                     // render dial rotations or button hovers
                     if(selected_dial >= 0)
                     {
-                        const Sint32 hh = dial_rect[selected_dial].h/2; // no point making this static
-
                         // scale dial sensitivity
                         float sense = 0.001f / dial_scale[selected_dial];
                         if(select_mode == 0)
@@ -1317,8 +1315,8 @@ int main(int argc, char *argv[])
                             sense = 0.3f / dial_scale[selected_dial];
 
                         // do rotation
-                        synth[selected_bank].dial_state[selected_dial] += ((dial_rect[selected_dial].y+hh) - y)*sense;
-                        //printf("%f %i %i\n", ((dial_rect[selected_dial].y+hh) - y)*sense, ((dial_rect[selected_dial].y+hh) - y), hh);
+                        SDL_GetRelativeMouseState(&rx, &ry);
+                        if(ry != 0){synth[selected_bank].dial_state[selected_dial] -= ((float)(ry))*sense;}
                         if(dial_neg[selected_dial] == 1)
                         {
                             if(synth[selected_bank].dial_state[selected_dial] >= 1.f)
@@ -1333,8 +1331,6 @@ int main(int argc, char *argv[])
                             else if(synth[selected_bank].dial_state[selected_dial] < 0.f)
                                 synth[selected_bank].dial_state[selected_dial] = 0.f;
                         }
-                        if(y != dial_rect[selected_dial].y+hh)
-                            SDL_WarpMouseInWindow(window, dial_rect[selected_dial].x+hh, dial_rect[selected_dial].y+hh);
 
                         // tick dial turn renders at 20 fps
                         static Uint32 lt = 0;
@@ -1410,7 +1406,8 @@ int main(int argc, char *argv[])
                     }
                     else if(selected_dial >= 0)
                     {
-                        SDL_ShowCursor(1);
+                        SDL_GetRelativeMouseState(&rx, &ry);
+                        SDL_SetRelativeMouseMode(SDL_FALSE);
                         selected_dial = -1;
                         doSynth(0);
                         render(screen);
@@ -1583,7 +1580,8 @@ int main(int argc, char *argv[])
                         {
                             if(ui.dial_hover[i] == 1)
                             {
-                                SDL_ShowCursor(0);
+                                SDL_GetRelativeMouseState(&rx, &ry);
+                                SDL_SetRelativeMouseMode(SDL_TRUE);
                                 selected_dial = i;
                                 break;
                             }
@@ -1607,7 +1605,7 @@ int main(int argc, char *argv[])
                                 sc=1;
                                 char file[256];
 #ifdef __linux__
-                                sprintf(file, "%s/Documents", getenv("HOME"));
+                                sprintf(file, "%s/EXPORTS", getenv("HOME"));
                                 mkdir(file, 0755);
                                 sprintf(file, "%s/Borg_ER-3", file);
                                 mkdir(file, 0755);
