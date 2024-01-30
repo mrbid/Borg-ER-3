@@ -9,6 +9,7 @@ https://james-william-fletcher.medium.com/the-borg-er-3-46641d5784be
 <details>
     <summary><b>Click here for more details</b></summary>
     <blockquote>
+    <br/>
     <b>FART</b> = Frequency, Amplitude, Resolution, Transition<br/>
     <b>Resolution</b> = How many additive sinusoids are combined to make the final waveshape.<br/>
     <b>Transition</b> = Selects which wave shape to output but also allows blending between the shapes.<br/>
