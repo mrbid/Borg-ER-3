@@ -7,7 +7,7 @@ Read more about this project over at the official Medium article:<br>
 https://james-william-fletcher.medium.com/the-borg-er-3-46641d5784be
 
 <details>
-    <summary><b>Click here for more details</b></summary>
+    <summary><h3>Click here for more details</h3></summary>
     <blockquote>
     <br/>
     <b>FART</b> = Frequency, Amplitude, Resolution, Transition<br/>
