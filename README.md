@@ -6,8 +6,8 @@ A portable (SDL) audio synthesizer / tone generator inspired by the Korg ER-1
 Read more about this project over at the official Medium article:<br>
 https://james-william-fletcher.medium.com/the-borg-er-3-46641d5784be
 
-<details>
-    <summary>Details</summary>
+
+    <summary><b>Technical details</b></summary>
     <blockquote>
     <b>FART</b> = Frequency, Amplitude, Resolution, Transition<br/>
     <b>Resolution</b> = How many additive sinusoids are combined to make the final waveshape.<br/>
@@ -21,7 +21,7 @@ https://james-william-fletcher.medium.com/the-borg-er-3-46641d5784be
     <b>You can use the Load button to reset any changes since your last Save.</b><br/><br/>
     <b>You can mouse 3 Y axis scroll zoom the oscilloscope, right click to reset zoom.</b>
     </blockquote>
-</details>
+
 
 ## Flathub
 https://flathub.org/apps/details/com.voxdsp.Borg
