@@ -13,18 +13,15 @@ The envelope can be clicked and dragged into any shape, the biquads can be manua
 
 On Windows exported files save to the local directory that the program was executed in, on Linux exported files save to: ~/EXPORTS/Borg_ER-3/
 
-## Technical details
-**FART** = Frequency, Amplitude, Resolution, Transition
-**Resolution** = How many additive sinusoids are combined to make the final waveshape.
-**Transition** = Selects which wave shape to output but also allows blending between the shapes.
-**Wave shape order:** Sine, Slanted Sine, Square, Saw, Triangle, Impulse, Violin.
-
-*Adjust the dials by left clicking and dragging or hovering and scrolling mouse 3 in the Y axis.*
-
-**Binds to play audio:** spacebar, mouse3, mouse4
-**Reset envelope:** right click on it
-**Scroll dial sensitivity selection:** right click, three sensitvity options
-
+### Technical details
+* **FART** = Frequency, Amplitude, Resolution, Transition
+* **Resolution** = How many additive sinusoids are combined to make the final waveshape.
+* **Transition** = Selects which wave shape to output but also allows blending between the shapes.
+* **Wave shape order:** Sine, Slanted Sine, Square, Saw, Triangle, Impulse, Violin.
+* **Binds to play audio:** spacebar, mouse3, mouse4
+* **Reset envelope:** right click on it
+* **Scroll dial sensitivity selection:** right click, three sensitvity options
+* Adjust the dials by left clicking and dragging or hovering and scrolling mouse 3 in the Y axis.
 * BIQUADS are executed from left to right, first BIQUAD 1, then 2, then 3.
 * You can use the Load button to reset any changes since your last Save.
 * You can mouse 3 Y axis scroll zoom the oscilloscope, right click to reset zoom.
