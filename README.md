@@ -3,35 +3,31 @@ A portable (SDL) audio synthesizer / tone generator inspired by the Korg ER-1
 
 [![Image of the Borg-ER3](https://dashboard.snapcraft.io/site_media/appmedia/2023/01/borger3_eyBQLNu.png)](https://www.youtube.com/watch?v=gLB91cO6RaE "Borg ER-3 FART Oscillators Demonstration Video")
 
-Read more about this project over at the official Medium article:<br>
-https://james-william-fletcher.medium.com/the-borg-er-3-46641d5784be
-<details>
-    <summary><h3>Click here for more details</h3></summary>
-    <blockquote>
-    <br/>
-    <b>FART</b> = Frequency, Amplitude, Resolution, Transition<br/>
-    <b>Resolution</b> = How many additive sinusoids are combined to make the final waveshape.<br/>
-    <b>Transition</b> = Selects which wave shape to output but also allows blending between the shapes.<br/>
-    <b>Wave shape order:</b> Sine, Slanted Sine, Square, Saw, Triangle, Impulse, Violin.<br/><br/>
-    <b>Adjust the dials by left clicking and dragging or hovering and scrolling mouse 3 in the Y axis.</b><br/><br/>
-    <b>Binds to play audio:</b> spacebar, mouse3, mouse4<br/>
-    <b>Reset envelope:</b> right click on it<br/>
-    <b>Scroll dial sensitivity selection:</b> right click, three sensitvity options<br/><br/>
-    <b>BIQUADS are executed from left to right, first BIQUAD 1, then 2, then 3.</b><br/><br/>
-    <b>You can use the Load button to reset any changes since your last Save.</b><br/><br/>
-    <b>You can mouse 3 Y axis scroll zoom the oscilloscope, right click to reset zoom.</b>
-    </blockquote>
-</details>
+* **FlatHub:** [com.voxdsp.Borg](https://flathub.org/apps/details/com.voxdsp.Borg)
+* **Snapcraft:** [Borg ER-3](https://snapcraft.io/borger3)
+* **Latest Release:** [*Windows, Linux, Deb, AppImage, etc*](https://github.com/mrbid/Borg-ER-3/releases)
 
-## Flathub
-https://flathub.org/apps/details/com.voxdsp.Borg
+Fixed-state modular synthesizer using FART oscillators, if you can hold back the chuckles for a moment stands for Frequency, Amplitude, Resolution, and Transformation oscillators, the resolution regards harmonic resolution and transformation regards the wave-shape being produced by the oscillator.
 
-## Snapcraft
-https://snapcraft.io/borger3
+The envelope can be clicked and dragged into any shape, the biquads can be manually configured on a per coefficient basis, they are executed in sequential order so BIQUAD 1 executes first.
 
-## Latest Release
-*Windows, Linux, Deb, AppImage, etc*<br>
-https://github.com/mrbid/Borg-ER-3/releases
+On Windows exported files save to the local directory that the program was executed in, on Linux exported files save to: ~/EXPORTS/Borg_ER-3/
+
+## Technical details
+**FART** = Frequency, Amplitude, Resolution, Transition
+**Resolution** = How many additive sinusoids are combined to make the final waveshape.
+**Transition** = Selects which wave shape to output but also allows blending between the shapes.
+**Wave shape order:** Sine, Slanted Sine, Square, Saw, Triangle, Impulse, Violin.
+
+*Adjust the dials by left clicking and dragging or hovering and scrolling mouse 3 in the Y axis.*
+
+**Binds to play audio:** spacebar, mouse3, mouse4
+**Reset envelope:** right click on it
+**Scroll dial sensitivity selection:** right click, three sensitvity options
+
+* BIQUADS are executed from left to right, first BIQUAD 1, then 2, then 3.
+* You can use the Load button to reset any changes since your last Save.
+* You can mouse 3 Y axis scroll zoom the oscilloscope, right click to reset zoom.
 
 ## Build Instructions
 ```
