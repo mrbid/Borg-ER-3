@@ -4,7 +4,7 @@ A portable (SDL) audio synthesizer / tone generator inspired by the Korg ER-1
 [![Image of the Borg-ER3](https://dashboard.snapcraft.io/site_media/appmedia/2023/01/borger3_eyBQLNu.png)](https://www.youtube.com/watch?v=gLB91cO6RaE "Borg ER-3 FART Oscillators Demonstration Video")
 
 * **FlatHub:** [com.voxdsp.Borg](https://flathub.org/apps/details/com.voxdsp.Borg)
-* **Snapcraft:** [Borg ER-3](https://snapcraft.io/borger3)
+* **Snapcraft:** [borger3](https://snapcraft.io/borger3)
 * **Latest Release:** [*Windows, Linux, Deb, AppImage, etc*](https://github.com/mrbid/Borg-ER-3/releases)
 
 Fixed-state modular synthesizer using FART oscillators, if you can hold back the chuckles for a moment stands for Frequency, Amplitude, Resolution, and Transformation oscillators, the resolution regards harmonic resolution and transformation regards the wave-shape being produced by the oscillator.
@@ -21,7 +21,7 @@ On Windows exported files save to the local directory that the program was execu
 * **Binds to play audio:** spacebar, mouse3, mouse4
 * **Reset envelope:** right click on it
 * **Scroll dial sensitivity selection:** right click, three sensitvity options
-* Adjust the dials by left clicking and dragging or hovering and scrolling mouse 3 in the Y axis.
+* Adjust dials by left click and drag or hover and scroll mouse 3 in the Y axis.
 * BIQUADS are executed from left to right, first BIQUAD 1, then 2, then 3.
 * You can use the Load button to reset any changes since your last Save.
 * You can mouse 3 Y axis scroll zoom the oscilloscope, right click to reset zoom.
