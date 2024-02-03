@@ -11,7 +11,7 @@ Fixed-state modular synthesizer using FART oscillators, if you can hold back the
 
 The envelope can be clicked and dragged into any shape, the biquads can be manually configured on a per coefficient basis, they are executed in sequential order so BIQUAD 1 executes first.
 
-On Windows exported files save to the local directory that the program was executed in, on Linux exported files save to: ~/EXPORTS/Borg_ER-3/
+On Windows exported files save to the local directory that the program was executed in, on Linux exported files save to: `~/EXPORTS/Borg_ER-3/`
 
 ### Technical details
 * **FART** = Frequency, Amplitude, Resolution, Transition
