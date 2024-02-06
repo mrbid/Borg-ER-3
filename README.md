@@ -23,7 +23,7 @@ On Windows exported files save to the local directory that the program was execu
 * **Scroll dial sensitivity selection:** right click, three sensitvity options
 * Adjust dials by left click and drag or hover and scroll mouse 3 in the Y axis.
 * BIQUADS are executed from left to right, first BIQUAD 1, then 2, then 3.
-* You can use the Load button to reset any changes since your last Save.
+* You can use the **Load** button to reset any changes since your last **Save**.
 * You can mouse 3 Y axis scroll zoom the oscilloscope, right click to reset zoom.
 
 ## Build Instructions
