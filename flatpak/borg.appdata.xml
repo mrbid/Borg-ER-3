@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop-application">
-	<id>borg.desktop</id>
+	<id>com.voxdsp.Borg</id>
 	<metadata_license>CC-BY-4.0</metadata_license>
 	<project_license>MIT</project_license>
 	<developer_name>James William Fletcher</developer_name>
