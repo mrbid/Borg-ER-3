@@ -3,15 +3,20 @@
 	<id>borg.desktop</id>
 	<metadata_license>CC-BY-4.0</metadata_license>
 	<project_license>MIT</project_license>
+	<developer_name>James William Fletcher</developer_name>
+	<launchable type="desktop-id">com.voxdsp.Borg.desktop</launchable>
 	<name>Borg ER-3</name>
-	<summary>Tone generator inspired by the Korg ER-1</summary>
+	<summary>Tone generator</summary>
 	<description>
 		<p>Fixed-state modular synthesizer using FART oscillators, if you can hold back the chuckles for a moment stands for Frequency, Amplitude, Resolution, and Transformation oscillators, the resolution regards harmonic resolution and transformation regards the wave-shape being produced by the oscillator.</p>
 		<p>The envelope can be clicked and dragged into any shape, the biquads can be manually configured on a per coefficient basis, they are executed in sequential order so BIQUAD 1 executes first.</p>
 		<p>Exported files save to ~/EXPORTS/Borg_ER-3/</p>
 	</description>
 	<screenshots>
-		<screenshot>https://dashboard.snapcraft.io/site_media/appmedia/2023/01/borger3_eyBQLNu.png</screenshot>
+		<screenshot type="default">
+			<image>https://dashboard.snapcraft.io/site_media/appmedia/2023/01/borger3_eyBQLNu.png</image>
+			<caption>Borg ER-3 Screenshot</caption>
+		</screenshot>
 	</screenshots>
 	<url type="homepage">https://github.com/mrbid/Borg-ER-3</url>
 	<releases>
