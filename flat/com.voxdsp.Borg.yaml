@@ -19,10 +19,10 @@ modules:
     build-commands:
       - cc main.c -Ofast -lSDL2 -lm -o borg
       - install -Dm 0755 borg -t ${FLATPAK_DEST}/bin
-      - install -Dm 0644 flatpak/borg.desktop ${FLATPAK_DEST}/share/applications/borg.desktop
-      - install -Dm 0644 flatpak/borg.appdata.xml ${FLATPAK_DEST}/share/metainfo/borg.appdata.xml
-      - install -Dm 0644 flatpak/borg.png ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps/borg.png
+      - install -Dm 0644 flat/borg.desktop ${FLATPAK_DEST}/share/applications/borg.desktop
+      - install -Dm 0644 flat/borg.appdata.xml ${FLATPAK_DEST}/share/metainfo/borg.appdata.xml
+      - install -Dm 0644 flat/borg.png ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps/borg.png
     sources:
       - type: git
         url: https://github.com/mrbid/Borg-ER-3
-        commit: 54e8a1a15b9c5b2adc5c3398653fbe83fded791a
+        commit: dc628388dd53e89626ec683f75239ee696c238a7
