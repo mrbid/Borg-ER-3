@@ -15,12 +15,12 @@
 	<screenshots>
 		<screenshot type="default">
 			<image>https://dashboard.snapcraft.io/site_media/appmedia/2023/01/borger3_eyBQLNu.png</image>
-			<caption>Borg ER-3 Screenshot</caption>
+			<caption>The Borg ER-3 inspired by the Korg ER-1</caption>
 		</screenshot>
 	</screenshots>
 	<url type="homepage">https://github.com/mrbid/Borg-ER-3</url>
 	<releases>
-		<release version="1.0.3" date="2023-12-07" />
+		<release version="1.0.4" date="2024-04-09" />
 	</releases>
 	<content_rating type="oars-1.0" />
 </component>
