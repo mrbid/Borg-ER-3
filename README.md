@@ -26,6 +26,8 @@ On Windows exported files save to the local directory that the program was execu
 * You can use the **Load** button to reset any changes since your last **Save**.
 * You can mouse scroll zoom the oscilloscope, right click to reset zoom.
 * You can hold the space bar while turning the dials to hear and see their effect in real-time.
+* Flip sign of dial by mouse3 or mouse4 clicking on it.
+* Reset/disable multiple selection button: right click on button.
 
 ## Build Instructions
 ```
