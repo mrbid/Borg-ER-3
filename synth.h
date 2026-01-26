@@ -168,48 +168,44 @@ inline float aliased_cos(float theta)
     }
 #endif
 
-float getImpulse(float phase, float resolution)
+float getBipulse(float phase, float resolution) // formant
 {
-    // https://meettechniek.info/additional/additive-synthesis.html
-
     float yr = 0.f;
-    
-    // if(resolution >= 0){yr += aliased_sin(phase);}
-    // if(resolution >= 1){yr -= aliased_cos(phase * 2.f) * 0.9f;}
-    // if(resolution >= 2){yr -= aliased_sin(phase * 3.f) * 0.8f;}
-    // if(resolution >= 3){yr += aliased_cos(phase * 4.f) * 0.7f;}
-    // if(resolution >= 4){yr += aliased_sin(phase * 5.f) * 0.6f;}
-    // if(resolution >= 5){yr -= aliased_cos(phase * 6.f) * 0.5f;}
-    // if(resolution >= 6){yr -= aliased_sin(phase * 7.f) * 0.4f;}
-    // if(resolution >= 7){yr += aliased_cos(phase * 8.f) * 0.3f;}
-    // if(resolution >= 8){yr += aliased_sin(phase * 9.f) * 0.2f;}
-    // if(resolution >= 9){yr -= aliased_cos(phase * 10.f)* 0.1f;}
+    float center = 5.f; // center harmonic
+    float width  = 2.f; // how wide the "formant" is
 
-    if(resolution >= 0 ){yr += aliased_sin(phase)       * 0.5f;}
-    if(resolution >= 3 ){yr -= aliased_cos(phase * 2.f) * 0.45f;}
-    if(resolution >= 6 ){yr -= aliased_sin(phase * 3.f) * 0.4f;}
-    if(resolution >= 9 ){yr += aliased_cos(phase * 4.f) * 0.35f;}
-    if(resolution >= 12){yr += aliased_sin(phase * 5.f) * 0.3f;}
-    if(resolution >= 16){yr -= aliased_cos(phase * 6.f) * 0.25f;}
-    if(resolution >= 19){yr -= aliased_sin(phase * 7.f) * 0.2f;}
-    if(resolution >= 22){yr += aliased_cos(phase * 8.f) * 0.15f;}
-    if(resolution >= 25){yr += aliased_sin(phase * 9.f) * 0.1f;}
-    if(resolution >= 28){yr -= aliased_cos(phase * 10.f)* 0.05f;}
+    for(int h = 1; h <= 30; ++h)
+    {
+        if(h > resolution) break;
+        float d = (h - center) / width;
+        float amp = expf(-d * d) / h; // Gaussian envelope
+        yr += aliased_sin(phase * h) * amp;
+    }
+
     return yr;
 }
 
-float getViolin(float phase, float resolution)
+float getViolin(float phase, float resolution) // Band-limited Impulse
 {
-    // https://meettechniek.info/additional/additive-synthesis.html
     float yr = 0.f;
-    if(resolution >= 0 ){yr += aliased_sin(phase)       * 0.995f;}
-    if(resolution >= 4 ){yr += aliased_cos(phase * 2.f) * 0.940f;}
-    if(resolution >= 8 ){yr += aliased_sin(phase * 3.f) * 0.425f;}
-    if(resolution >= 12){yr += aliased_cos(phase * 4.f) * 0.480f;}
-    if(resolution >= 16){yr += aliased_cos(phase * 6.f) * 0.365f;}
-    if(resolution >= 20){yr += aliased_sin(phase * 7.f) * 0.040f;}
-    if(resolution >= 24){yr += aliased_cos(phase * 8.f) * 0.085f;}
-    if(resolution >= 28){yr += aliased_cos(phase * 10.f)* 0.090f;}
+    const float amps[10] = {0.5f,0.45f,0.4f,0.35f,0.3f,0.25f,0.2f,0.15f,0.1f,0.05f};
+
+    for(int h = 0; h < 10; ++h)
+    {
+        float step = h * 3.f;
+        if(resolution > step)
+        {
+            float phaseOffset = (h % 2 == 0) ? 0.f : M_PI/2.f;
+            float amp = amps[h];
+            if(resolution < step + 3.f)
+            {
+                float t = (resolution - step) / 3.f;
+                amp *= t;
+            }
+            yr += aliased_sin(phase * (h + 1) + phaseOffset) * amp;
+        }
+    }
+
     return yr;
 }
 
