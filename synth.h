@@ -131,7 +131,7 @@ inline float aliased_cos(float theta)
     float getBipulse(float phase, float resolution) // formant
     {
         float yr = 0.f;
-        int i = 1;
+        int i = 0;
         for(float h = 1.f; h <= resolution; h+=1.f)
         {
             const float d = (h - 5.f) * 0.5f;
