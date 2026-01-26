@@ -500,12 +500,12 @@ float doOsc(Uint32 oscid, float input1, float input2)
         {
             if(r < 29.f && rd > 0.f)
             {
-                tr =  getImpulse(oscphase[oscid], rb) * (1.f-rd);
-                tr += getImpulse(oscphase[oscid], rb+1.f) * rd;
+                tr =  getBipulse(oscphase[oscid], rb) * (1.f-rd);
+                tr += getBipulse(oscphase[oscid], rb+1.f) * rd;
             }
             else
             {
-                tr = getImpulse(oscphase[oscid], r);
+                tr = getBipulse(oscphase[oscid], r);
             }
             o += (tr * a) * d2;
         }
@@ -523,12 +523,12 @@ float doOsc(Uint32 oscid, float input1, float input2)
 
         if(r < 29.f && rd > 0.f)
         {
-            tr =  getImpulse(oscphase[oscid], rb) * (1.f-rd);
-            tr += getImpulse(oscphase[oscid], rb+1.f) * rd;
+            tr =  getBipulse(oscphase[oscid], rb) * (1.f-rd);
+            tr += getBipulse(oscphase[oscid], rb+1.f) * rd;
         }
         else
         {
-            tr = getImpulse(oscphase[oscid], r);
+            tr = getBipulse(oscphase[oscid], r);
         }
         o = (tr * a) * d1;
         
@@ -1161,7 +1161,7 @@ int main(int argc, char *argv[])
     }
 
     // credit
-    printf("Borg ER-3 by James William Fletcher (v1.0.4)\n\n");
+    printf("Borg ER-3 by James William Fletcher (v1.0.5)\n\n");
 
     // get app dir
     basedir = SDL_GetBasePath();
