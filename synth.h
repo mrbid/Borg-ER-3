@@ -72,6 +72,7 @@ inline float aliased_cos(float theta)
 #ifdef USE_RECIPROCAL_TABLES
     const float ht[] = {0.5f, 0.333333f, 0.25f, 0.2f, 0.166667f, 0.142857f, 0.125f, 0.111111f, 0.1f, 0.0909091f, 0.0833333f, 0.0769231f, 0.0714286f, 0.0666667f, 0.0625f, 0.0588235f, 0.0555556f, 0.0526316f, 0.05f, 0.047619f, 0.0454545f, 0.0434783f, 0.0416667f, 0.04f, 0.0384615f, 0.037037f, 0.0357143f, 0.0344828f, 0.0333333f, 0.0322581f, 0.03125f, 0.030303f, 0.0294118f, 0.0285714f, 0.0277778f, 0.027027f, 0.0263158f, 0.025641f, 0.025f, 0.0243902f, 0.0238095f, 0.0232558f, 0.0227273f, 0.0222222f, 0.0217391f, 0.0212766f, 0.0208333f, 0.0204082f, 0.02f, 0.0196078f, 0.0192308f, 0.0188679f, 0.0185185f, 0.0181818f, 0.0178571f, 0.0175439f, 0.0172414f, 0.0169492f};
     const float hht[] = {0.111111f, 0.0625f, 0.04f, 0.0277778f, 0.0204082f, 0.015625f, 0.0123457f, 0.01f, 0.00826446f, 0.00694444f, 0.00591716f, 0.00510204f, 0.00444444f, 0.00390625f, 0.00346021f, 0.00308642f, 0.00277008f, 0.0025f, 0.00226757f, 0.00206612f, 0.00189036f, 0.00173611f, 0.0016f, 0.00147929f, 0.00137174f, 0.00127551f, 0.00118906f, 0.00111111f, 0.00104058f, 0.000976562f, 0.000918274f, 0.000865052f, 0.000816327f, 0.000771605f, 0.00073046f, 0.000692521f, 0.000657462f, 0.000625f, 0.000594884f, 0.000566893f, 0.000540833f, 0.000516529f, 0.000493827f, 0.00047259f, 0.000452694f, 0.000434028f, 0.000416493f, 0.0004f, 0.000384468f, 0.000369822f, 0.000355999f, 0.000342936f, 0.000330579f, 0.000318878f, 0.000307787f, 0.000297265f, 0.000287274f};
+    const float hhht[] = {1.f, 0.5f, 0.333333f, 0.25f, 0.2f, 0.166667f, 0.142857f, 0.125f, 0.111111f, 0.1f, 0.0909091f, 0.0833333f, 0.0769231f, 0.0714286f, 0.0666667f, 0.0625f, 0.0588235f, 0.0555556f, 0.0526316f, 0.05f, 0.047619f, 0.0454545f, 0.0434783f, 0.0416667f, 0.04f, 0.0384615f, 0.037037f, 0.0357143f, 0.0344828f, 0.0333333f};
 #endif
 
 #ifdef USE_RECIPROCAL_TABLES
@@ -126,6 +127,21 @@ inline float aliased_cos(float theta)
         }
         return yr;
     }
+
+    float getBipulse(float phase, float resolution) // formant
+    {
+        float yr = 0.f;
+        int i = 1;
+        for(float h = 1.f; h <= resolution; h+=1.f)
+        {
+            const float d = (h - 5.f) * 0.5f;
+            const float amp = expf(-d * d) * hhht[i];
+            yr += aliased_sin(phase * h) * amp;
+            i++;
+        }
+
+        return yr;
+    }
 #else
     float getSlantSine(float phase, float resolution)
     {
@@ -166,40 +182,35 @@ inline float aliased_cos(float theta)
         }
         return yr;
     }
+
+    float getBipulse(float phase, float resolution) // formant
+    {
+        float yr = 0.f;
+        for(float h = 1.f; h <= resolution; h+=1.f)
+        {
+            const float d = (h - 5.f) * 0.5f;
+            const float amp = expf(-d * d) / h;
+            yr += aliased_sin(phase * h) * amp;
+        }
+
+        return yr;
+    }
 #endif
 
-float getBipulse(float phase, float resolution) // formant
-{
-    float yr = 0.f;
-    float center = 5.f; // center harmonic
-    float width  = 2.f; // how wide the "formant" is
-
-    for(int h = 1; h <= 30; ++h)
-    {
-        if(h > resolution) break;
-        float d = (h - center) / width;
-        float amp = expf(-d * d) / h; // Gaussian envelope
-        yr += aliased_sin(phase * h) * amp;
-    }
-
-    return yr;
-}
-
+const float vamps[10] = {0.5f,0.45f,0.4f,0.35f,0.3f,0.25f,0.2f,0.15f,0.1f,0.05f};
 float getViolin(float phase, float resolution) // Band-limited Impulse
 {
     float yr = 0.f;
-    const float amps[10] = {0.5f,0.45f,0.4f,0.35f,0.3f,0.25f,0.2f,0.15f,0.1f,0.05f};
-
     for(int h = 0; h < 10; ++h)
     {
         float step = h * 3.f;
         if(resolution > step)
         {
-            float phaseOffset = (h % 2 == 0) ? 0.f : M_PI/2.f;
-            float amp = amps[h];
+            float phaseOffset = (h % 2 == 0) ? 0.f : 1.57079632679f;
+            float amp = vamps[h];
             if(resolution < step + 3.f)
             {
-                float t = (resolution - step) / 3.f;
+                float t = (resolution - step) * 0.33333333333333333333f;
                 amp *= t;
             }
             yr += aliased_sin(phase * (h + 1) + phaseOffset) * amp;
@@ -228,11 +239,12 @@ inline float squish(float f)
 
 inline Sint8 quantise_float(float f)
 {
-    if(f < 0.f)
-        f -= 0.5f;
-    else
-        f += 0.5f;
-    return (Sint8)f;
+    return roundf(f);
+    // if(f < 0.f)
+    //     f -= 0.5f;
+    // else
+    //     f += 0.5f;
+    // return (Sint8)f;
 }
 
 // vars
