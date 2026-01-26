@@ -139,7 +139,6 @@ inline float aliased_cos(float theta)
             yr += aliased_sin(phase * h) * amp;
             i++;
         }
-
         return yr;
     }
 #else
@@ -192,7 +191,6 @@ inline float aliased_cos(float theta)
             const float amp = expf(-d * d) / h;
             yr += aliased_sin(phase * h) * amp;
         }
-
         return yr;
     }
 #endif
@@ -203,10 +201,10 @@ float getViolin(float phase, float resolution) // Band-limited Impulse
     float yr = 0.f;
     for(int h = 0; h < 10; ++h)
     {
-        float step = h * 3.f;
+        const float step = h * 3.f;
         if(resolution > step)
         {
-            float phaseOffset = (h % 2 == 0) ? 0.f : 1.57079632679f;
+            const float phaseOffset = (h % 2 == 0) ? 0.f : 1.57079632679f;
             float amp = vamps[h];
             if(resolution < step + 3.f)
             {
@@ -216,7 +214,6 @@ float getViolin(float phase, float resolution) // Band-limited Impulse
             yr += aliased_sin(phase * (h + 1) + phaseOffset) * amp;
         }
     }
-
     return yr;
 }
 
