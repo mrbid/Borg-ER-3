@@ -17,7 +17,7 @@ On Windows exported files save to the local directory that the program was execu
 * **FART** = Frequency, Amplitude, Resolution, Transition
 * **Resolution** = How many additive sinusoids are combined to make the final waveshape.
 * **Transition** = Selects which wave shape to output but also allows blending between the shapes.
-* **Wave shape order:** Sine, Slanted Sine, Square, Saw, Triangle, Impulse, Violin.
+* **Wave shape order:** Sine, Slanted Sine, Square, Saw, Triangle, Formant, Impulse.
 * **Binds to play audio:** spacebar, mouse3, mouse4
 * **Reset envelope:** right click on it
 * **Scroll dial sensitivity selection:** right click, three sensitvity options
