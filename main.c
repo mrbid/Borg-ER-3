@@ -1185,7 +1185,7 @@ int main(int argc, char *argv[])
     printf("FART = Frequency, Amplitude, Resolution, Transition\n");
     printf("Resolution = How many additive sinusoids are combined to make the final waveshape.\n");
     printf("Transition = Selects which wave shape to output but also allows blending between the shapes.\n");
-    printf("Wave shape order: Sine, Slanted Sine, Square, Saw, Triangle, Impulse, Violin.\n");
+    printf("Wave shape order: Sine, Slanted Sine, Square, Saw, Triangle, Formant, Impulse.\n");
     printf("\n");
     printf("Adjust the dials by left clicking and dragging or hovering and scrolling mouse 3 in the Y axis.\n");
     printf("\n");
